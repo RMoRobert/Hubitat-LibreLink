@@ -1,0 +1,14 @@
+{
+   "author": "Robert Morris",
+   "gitHubUrl": "https://github.com/RMoRobert/Hubitat-LibreLink",
+   "payPalUrl": "https://paypal.me/bertabcd1234",
+   "packages": [
+      {
+         "name": "LibreLink",
+         "category": "Utility",
+         "location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/hpm-libreLinkPackageManifest.json",
+         "description": "Open-source app and driver set to share devices (events and attributes) and modes between two or more Hubitat hubs",
+         "tags": ["LAN", "Tools & Utilities"]
+      }
+   ]
+}

@@ -1,0 +1,73 @@
+{
+	"packageName": "LibreLink",
+	"minimumHEVersion": "2.1.0",
+	"author": "Robert Morris",
+	"dateReleased": "2020-10-10",
+	"communityLink": "",
+	"licenseFile": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+	"releaseNotes": "",
+	"apps" : [
+		{
+			"id": "a0be9220-3af3-429a-9b2b-e9b42d4d46f6",
+			"name": "LibreLink",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/apps/librelink-parent-app.groovy",
+			"required": true,
+			"version": "0.9.0",
+			"primary": true,
+			"oauth": false
+		},
+		{
+			"id": "4efb18c8-b35c-42ae-a8e1-c7e35138a58f",
+			"name": "LibreLink (Linked Hub Child App)",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/apps/librelink-child-linked-hub-app.groovy",
+			"required": true,
+			"version": "0.9.0",
+			"primary": false,
+			"oauth": true
+		}
+	],
+	"drivers" : [
+		{
+			"id": "42be25f5-8571-40b9-9ef3-1c9d9a5a8ad4",
+			"name": "LibreLink Hub",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-hub.groovy",
+			"version": "0.9.0",
+			"required": true
+		},
+		{
+			"id": "83222725-475c-4dd9-9354-1547c87a8906",
+			"name": "LibreLink Switch",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-switch.groovy",
+			"version": "0.9.0",
+			"required": true
+		},
+		{
+			"id": "fa4f71f7-eab3-4f86-9b19-6286baa17b93",
+			"name": "LibreLink Dimmer",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-dimmer.groovy",
+			"version": "0.9.0",
+			"required": true
+		},
+		{
+			"id": "5deb7ca3-ad6f-44cc-975f-ee3553758e71",
+			"name": "LibreLink RGBW Bulb",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-rgbw-bulb.groovy",
+			"version": "0.9.0",
+			"required": true
+		},
+		{
+			"id": "9bee01bc-368d-4a76-b80a-1c9550793391",
+			"name": "LibreLink Motion Sensor",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-motion-sensor.groovy",
+			"version": "0.9.0",
+			"required": true
+		}
+	]
+}
