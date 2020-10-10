@@ -18,7 +18,7 @@
  */ 
  
 metadata {
-   definition (name: "LibreLink Scene Dimmer", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-dimmer.groovy") {
+   definition (name: "LibreLink Scene Dimmer", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-scene-dimmer.groovy") {
       capability "Actuator"
       capability "Refresh"
       capability "Switch"

@@ -2,7 +2,7 @@
 Connect devices and more from multiple Hubitat Elevation hubs (syncs device attributes/events, sends device commands; can synchronize modes).
 
 ## Installation Instructions
-To install via Hubitat Package Manager, add a custom repository. The repository URL is: https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/hpm-libreLinkPackageManifest.json
+To install via Hubitat Package Manager, add a custom package (Install > From a URL). The custom package repository URL is: https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/hpm-libreLinkPackageManifest.json
 
 Alternatively, you may you may manually install as below:
 1. Install the LibreLink parent and child apps on all Hubitat hubs:

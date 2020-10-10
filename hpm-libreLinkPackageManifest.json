@@ -54,6 +54,14 @@
 			"required": true
 		},
 		{
+			"id": "eb2d51f8-2bae-5a68-891d-ac128b10739b",
+			"name": "LibreLink Dimmer",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-scene-dimmer.groovy",
+			"version": "0.9.0",
+			"required": true
+		},
+		{
 			"id": "5deb7ca3-ad6f-44cc-975f-ee3553758e71",
 			"name": "LibreLink RGBW Bulb",
 			"namespace": "RMoRobert",
