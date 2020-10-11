@@ -50,21 +50,29 @@ String getVersion() {
 }
 
 @Field static String childNamespace = "RMoRobert"
-@Field static Map linkableDevices = [
-   "llSwitches": [capability: "capability.switch", displayName: "Switches", driver: "LibreLink Switch"],
-   "llDimmers": [capability: "capability.switchLevel", displayName: "Dimmers", driver: "LibreLink Dimmer"],
-   "llSceneDimmer": [capability: "capability.switchLevel", displayName: "Scene Dimmers (Switch/Level and Buttons)", driver: "LibreLink Scene Dimmer"],
-   "llRGBWBulbs": [capability: "capability.colorControl", displayName: "RGBW Bulbs", driver: "LibreLink RGBW Bulb"],
-   "llMotions": [capability: "capability.motionSensor", displayName: "Motion sensors", driver: "LibreLink Motion Sensor"],
-   "llMotionHumids": [capability: "capability.motionSensor", displayName: "Motion/humidity sensors", driver: "LibreLink Motion/Humidity Sensor"]
-   "llMotionLuxes": [capability: "capability.motionSensor", displayName: "Motion/lux sensors", driver: "LibreLink Motion/Lux Sensor"],
-   "llContacts": [capability: "capability.contactSensor", displayName: "Contact sensors", driver: "LibreLink Contact Sensor"],
-   "llWaters": [capability: "capability.waterSensor", displayName: "Water sensors", driver: "LibreLink Water Sensor"],
-   "llButtonsPHRDT": [capability: "capability.pushableButton", displayName: "Buttons (push/hold/release/double-tap)", driver: "LibreLink Button (Push/Hold/Release/Double-Tap)"],
-   "llLocks": [capability: "capability.lock", displayName: "Locks", driver: "LibreLink Lock"],
-   "llMobileAppDevs": [capability: "capability.notification", displayName: "Mobile app devices", driver: "LibreLink Mobile App Device"],
-   "llTempHums": [capability: "capability.temperatureMeasurement", displayName: "Temperature/Humidity sensors", driver: "LibreLink Temperature/Humidity Sensor"],
-   "llThermostats": [capability: "capability.thermostat", displayName: "Thermostats", driver: "LibreLink Thermostat"]
+
+@Field static Map linkableDevices =
+[
+   "Switches, Dimmers, Bulbs": [
+      "llSwitches": [capability: "capability.switch", displayName: "Switches", driver: "LibreLink Switch"],
+      "llDimmers": [capability: "capability.switchLevel", displayName: "Dimmers", driver: "LibreLink Dimmer"],
+      "llSceneDimmer": [capability: "capability.switchLevel", displayName: "Scene Dimmers (Switch/Level and Buttons)", driver: "LibreLink Scene Dimmer"],
+      "llRGBWBulbs": [capability: "capability.colorControl", displayName: "RGBW Bulbs", driver: "LibreLink RGBW Bulb"]
+   ],
+   "Sensors": [   
+      "llContacts": [capability: "capability.contactSensor", displayName: "Contact sensors", driver: "LibreLink Contact Sensor"],
+      "llMotions": [capability: "capability.motionSensor", displayName: "Motion sensors", driver: "LibreLink Motion Sensor"],
+      "llMotionHumids": [capability: "capability.motionSensor", displayName: "Motion/humidity sensors", driver: "LibreLink Motion/Humidity Sensor"],
+      "llMotionLuxes": [capability: "capability.motionSensor", displayName: "Motion/lux sensors", driver: "LibreLink Motion/Lux Sensor"],
+      "llTempHums": [capability: "capability.temperatureMeasurement", displayName: "Temperature/Humidity sensors", driver: "LibreLink Temperature/Humidity Sensor"],
+      "llWaters": [capability: "capability.waterSensor", displayName: "Water sensors", driver: "LibreLink Water Sensor"]
+   ],
+   "Buttons, Locks, Mobile App Devices, Thermostats": [
+      "llButtonsPHRDT": [capability: "capability.pushableButton", displayName: "Buttons (push/hold/release/double-tap)", driver: "LibreLink Button (Push/Hold/Release/Double-Tap)"],
+      "llLocks": [capability: "capability.lock", displayName: "Locks", driver: "LibreLink Lock"],
+      "llMobileAppDevs": [capability: "capability.notification", displayName: "Mobile app devices", driver: "LibreLink Mobile App Device"],
+      "llThermostats": [capability: "capability.thermostat", displayName: "Thermostats", driver: "LibreLink Thermostat"]
+   ]
 ]
 
 preferences {
@@ -259,8 +267,16 @@ def pageLinkDevices() {
       }*/
       section(styleSection("Choose devices to link")) {
          paragraph "Create linked devices on other hub for these devices on this hub:"
-         linkableDevices.each { inputName, properties ->
-            input name: inputName, type: properties.capability, title: properties.displayName, multiple: true
+         log.error linkableDevices
+         linkableDevices.each { category -> 
+            log.warn category
+            paragraph ""
+            paragraph(styleSection("${category.key}"))
+            category.value.each { inputName, properties ->
+               log.trace inputName
+               log.debug properties
+               input name: inputName, type: properties.capability, title: properties.displayName, multiple: true
+            }
          }
       }
       section(styleSection("Other options")) {
@@ -357,14 +373,17 @@ void setModeSyncSettings() {
  */
 void requestLinkedDeviceCreation() {
    Map<Map> devsToLink = [:]
-   linkableDevices.each { inputName, properties ->
-      if (settings[inputName]) {
-         Map devsOfType = [:]
-         settings[inputName].each {
-            devsOfType[it.id] = it.displayName
+
+   linkableDevices.each { category ->
+      category.value.each { inputName, properties ->         
+         if (settings[inputName]) {
+            Map devsOfType = [:]
+            settings[inputName].each {
+               devsOfType[it.id] = it.displayName
+            }
+            log.warn "devsOfType = $devsOfType"
+            devsToLink << [(inputName): devsOfType]
          }
-         log.warn "devsOfType = $devsOfType"
-         devsToLink << [(inputName): devsOfType]
       }
    }
    if (enableDebug) log.debug "Creating devices for: $devsToLink"
@@ -377,11 +396,13 @@ void requestLinkedDeviceCreation() {
  * so can send to linked hub when needed
  */
 void subscribeToLinkedDevices() {
-   linkableDevices.each { inputName, properties ->
-      if (settings[inputName]) {
-         settings[inputName].each { dev ->
-            dev.getSupportedAttributes().each { attr ->
-               subscribe(dev, attr.name, handleDeviceEvent)
+   linkableDevices.each { category -> 
+      category.value.each { inputName, properties ->
+         if (settings[inputName]) {
+            settings[inputName].each { dev ->
+               dev.getSupportedAttributes().each { attr ->
+                  subscribe(dev, attr.name, handleDeviceEvent)
+               }
             }
          }
       }
@@ -599,7 +620,11 @@ Map handleCreateLinkedDevices() {
    Boolean success = true
    if (!(request?.JSON?.devicesToLink)) success = false
    request?.JSON?.devicesToLink?.each { devType, devs ->
-      String driverName = linkableDevices.find { it.key == devType }?.value?.driver
+      String driverName = null
+      linkableDevices.each { category, selectorMaps ->
+         if (driverName != null) return
+         driverName = selectorMaps.find { it.key == "llDimmers" }?.value?.driver
+      }
       if (driverName != null) {
          devs.each {
             if (enableDebug) log.debug "Creating device for ${it.value} (ID: ${it.key})..."
@@ -610,6 +635,7 @@ Map handleCreateLinkedDevices() {
             else {
                try {
                   com.hubitat.app.DeviceWrapper dev = addChildDevice(childNamespace, driverName, dni, null, [name: it.value])
+                  pauseExecution(100) // dirty fix for: device sometimes isn't available yet for next step...maybe driver should do instead on install?
                   dev?.syncAttributes()
                }
                catch (com.hubitat.app.exception.UnknownDeviceTypeException ex) {
