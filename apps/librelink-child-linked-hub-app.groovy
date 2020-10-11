@@ -623,7 +623,7 @@ Map handleCreateLinkedDevices() {
       String driverName = null
       linkableDevices.each { category, selectorMaps ->
          if (driverName != null) return
-         driverName = selectorMaps.find { it.key == "llDimmers" }?.value?.driver
+         driverName = selectorMaps.find { it.key == devType }?.value?.driver
       }
       if (driverName != null) {
          devs.each {
