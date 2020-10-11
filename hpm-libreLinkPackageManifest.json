@@ -30,18 +30,18 @@
 	],
 	"drivers" : [
 		{
-			"id": "42be25f5-8571-40b9-9ef3-1c9d9a5a8ad4",
-			"name": "LibreLink Hub",
+			"id": "27a78a0f-8e7c-4992-a838-1c92d2f687e4",
+			"name": "LibreLink Button (Push/Hold/Release/Double-Tap)",
 			"namespace": "RMoRobert",
-			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-hub.groovy",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-button-push-hold-rel-dbl-temp.groovy",
 			"version": "0.9.0",
 			"required": true
 		},
 		{
-			"id": "83222725-475c-4dd9-9354-1547c87a8906",
-			"name": "LibreLink Switch",
+			"id": "36529818-2a35-43d3-972c-198c8e4f9ba0",
+			"name": "LibreLink Contact Sensor",
 			"namespace": "RMoRobert",
-			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-switch.groovy",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-contact-sensor.groovy",
 			"version": "0.9.0",
 			"required": true
 		},
@@ -54,18 +54,26 @@
 			"required": true
 		},
 		{
-			"id": "eb2d51f8-2bae-5a68-891d-ac128b10739b",
-			"name": "LibreLink Dimmer",
+			"id": "42be25f5-8571-40b9-9ef3-1c9d9a5a8ad4",
+			"name": "LibreLink Hub",
 			"namespace": "RMoRobert",
-			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-scene-dimmer.groovy",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-hub.groovy",
 			"version": "0.9.0",
 			"required": true
 		},
 		{
-			"id": "5deb7ca3-ad6f-44cc-975f-ee3553758e71",
-			"name": "LibreLink RGBW Bulb",
+			"id": "4784f3f0-54e2-4fa7-9554-a85a441b8d96",
+			"name": "LibreLink Lock",
 			"namespace": "RMoRobert",
-			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-rgbw-bulb.groovy",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-lock.groovy",
+			"version": "0.9.0",
+			"required": true
+		},
+		{
+			"id": "a1d33952-c87a-48e3-a6e9-57dde49e306f",
+			"name": "LibreLink Motion/Lux Sensor",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-motion-lux-sensor.groovy",
 			"version": "0.9.0",
 			"required": true
 		},
@@ -78,18 +86,42 @@
 			"required": true
 		},
 		{
-			"id": "c183281f-a391-468e-a6bf-f28441425c4a",
-			"name": "LibreLink Thermostat",
+			"id": "5deb7ca3-ad6f-44cc-975f-ee3553758e71",
+			"name": "LibreLink RGBW Bulb",
 			"namespace": "RMoRobert",
-			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-thermostat.groovy",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-rgbw-bulb.groovy",
 			"version": "0.9.0",
 			"required": true
 		},
 		{
-			"id": "36529818-2a35-43d3-972c-198c8e4f9ba0",
-			"name": "LibreLink Contact Sensor",
+			"id": "eb2d51f8-2bae-5a68-891d-ac128b10739b",
+			"name": "LibreLink Scene Dimmer",
 			"namespace": "RMoRobert",
-			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-contact-sensor.groovy",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-scene-dimmer.groovy",
+			"version": "0.9.0",
+			"required": true
+		},
+		{
+			"id": "83222725-475c-4dd9-9354-1547c87a8906",
+			"name": "LibreLink Switch",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-switch.groovy",
+			"version": "0.9.0",
+			"required": true
+		},
+		{
+			"id": "ea904b6a-1e40-4b0e-b92d-7575267b9f45",
+			"name": "LibreLink Temperature/Humidity Sensor",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-temp-humidity-sensor.groovy",
+			"version": "0.9.0",
+			"required": true
+		},
+		{
+			"id": "c183281f-a391-468e-a6bf-f28441425c4a",
+			"name": "LibreLink Thermostat",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-thermostat.groovy",
 			"version": "0.9.0",
 			"required": true
 		}

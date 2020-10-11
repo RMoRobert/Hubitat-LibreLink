@@ -56,9 +56,11 @@ String getVersion() {
    "llSceneDimmer": [capability: "capability.switchLevel", displayName: "Scene Dimmers (Switch/Level and Buttons)", driver: "LibreLink Scene Dimmer"],
    "llRGBWBulbs": [capability: "capability.colorControl", displayName: "RGBW Bulbs", driver: "LibreLink RGBW Bulb"],
    "llMotions": [capability: "capability.motionSensor", displayName: "Motion sensors", driver: "LibreLink Motion Sensor"],
+   "llMotionLuxes": [capability: "capability.motionSensor", displayName: "Motion/liux sensors", driver: "LibreLink Motion/Lux Sensor"],
    "llContacts": [capability: "capability.contactSensor", displayName: "Contact sensors", driver: "LibreLink Contact Sensor"],
-   "llButtonsPHRDT": [capability: "capability.pushableButton", displayName: "Button (Push/Hold/Release/Double-Tap)", driver: "LibreLink Button (Push/Hold/Release/Double-Tap)"],
+   "llButtonsPHRDT": [capability: "capability.pushableButton", displayName: "Buttons (push/hold/release/double-tap)", driver: "LibreLink Button (Push/Hold/Release/Double-Tap)"],
    "llLocks": [capability: "capability.lock", displayName: "Locks", driver: "LibreLink Lock"],
+   "llTempHums": [capability: "capability.temperatureMeasurement", displayName: "Temperature/Humidity sensors", driver: "LibreLink Temperature/Humidity Sensor"],
    "llThermostats": [capability: "capability.thermostat", displayName: "Thermostats", driver: "LibreLink Thermostat"]
 ]
 
