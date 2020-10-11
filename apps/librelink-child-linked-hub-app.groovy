@@ -267,14 +267,10 @@ def pageLinkDevices() {
       }*/
       section(styleSection("Choose devices to link")) {
          paragraph "Create linked devices on other hub for these devices on this hub:"
-         log.error linkableDevices
-         linkableDevices.each { category -> 
-            log.warn category
+         linkableDevices.each { category ->
             paragraph ""
             paragraph(styleSection("${category.key}"))
             category.value.each { inputName, properties ->
-               log.trace inputName
-               log.debug properties
                input name: inputName, type: properties.capability, title: properties.displayName, multiple: true
             }
          }
@@ -381,7 +377,7 @@ void requestLinkedDeviceCreation() {
             settings[inputName].each {
                devsOfType[it.id] = it.displayName
             }
-            log.warn "devsOfType = $devsOfType"
+            //log.trace "devsOfType = $devsOfType"
             devsToLink << [(inputName): devsOfType]
          }
       }
@@ -810,9 +806,10 @@ void handleDeviceEvent(evt) {
  */
 com.hubitat.app.DeviceWrapper findDeviceById(String id) {
    com.hubitat.app.DeviceWrapper dev
-   linkableDevices.each { linkableDev ->
-      if (dev != null) return
-      dev = settings[linkableDev.key]?.find { it.id == id }
+   linkableDevices.each { category ->
+      category.value.each { inputName, properties ->
+         dev = settings[inputName]?.find { it.id == id }
+      }
    }
    return dev
 }
