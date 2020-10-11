@@ -76,6 +76,22 @@
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-motion-sensor.groovy",
 			"version": "0.9.0",
 			"required": true
+		},
+		{
+			"id": "c183281f-a391-468e-a6bf-f28441425c4a",
+			"name": "LibreLink Thermostat",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-thermostat.groovy",
+			"version": "0.9.0",
+			"required": true
+		},
+		{
+			"id": "36529818-2a35-43d3-972c-198c8e4f9ba0",
+			"name": "LibreLink Contact Sensor",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-contact-sensor.groovy",
+			"version": "0.9.0",
+			"required": true
 		}
 	]
 }
