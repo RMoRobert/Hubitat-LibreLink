@@ -807,7 +807,9 @@ void handleDeviceEvent(evt) {
 com.hubitat.app.DeviceWrapper findDeviceById(String id) {
    com.hubitat.app.DeviceWrapper dev
    linkableDevices.each { category ->
+      if (dev != null) return
       category.value.each { inputName, properties ->
+         if (dev != null) return
          dev = settings[inputName]?.find { it.id == id }
       }
    }
