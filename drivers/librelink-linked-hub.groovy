@@ -13,12 +13,12 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-10-04
+ *  Last modified: 2020-10-11
  *
  */ 
  
 metadata {
-   definition (name: "LibreLink Hub", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-hub.groovy") {
+   definition (name: "LibreLink Linked Hub", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-linked-hub.groovy") {
       capability "Actuator"
       capability "PresenceSensor"
       capability "Refresh"

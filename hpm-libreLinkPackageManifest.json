@@ -2,7 +2,7 @@
 	"packageName": "LibreLink",
 	"minimumHEVersion": "2.1.0",
 	"author": "Robert Morris",
-	"dateReleased": "2020-10-10",
+	"dateReleased": "2020-10-11",
 	"communityLink": "",
 	"licenseFile": "https://www.apache.org/licenses/LICENSE-2.0.txt",
 	"releaseNotes": "",
@@ -55,9 +55,9 @@
 		},
 		{
 			"id": "42be25f5-8571-40b9-9ef3-1c9d9a5a8ad4",
-			"name": "LibreLink Hub",
+			"name": "LibreLink Linked Hub",
 			"namespace": "RMoRobert",
-			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-hub.groovy",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-linked-hub.groovy",
 			"version": "0.9.0",
 			"required": true
 		},

@@ -226,7 +226,7 @@ def pageManageHub() {
    com.hubitat.app.DeviceWrapper hub = getChildDevices()?.find({it.getDeviceNetworkId() == "LL/${app.id}/LinkedHub"})
    if (hub == null) {
       log.debug "Other hub device does not exist; creating"
-      def devDriver = "LibreLink Hub"
+      def devDriver = "LibreLink Linked Hub"
       def devDNI = "LL/${app.id}/LinkedHub"
       def devProps = [name: "LibreLink Linked Hub " + (otherHubNickname ? "(${otherHubNickname})" : "(${app.id})")]
       addChildDevice(childNamespace, devDriver, devDNI, null, devProps)
@@ -631,7 +631,7 @@ Map handleCreateLinkedDevices() {
             else {
                try {
                   com.hubitat.app.DeviceWrapper dev = addChildDevice(childNamespace, driverName, dni, null, [name: it.value])
-                  pauseExecution(100) // dirty fix for: device sometimes isn't available yet for next step...maybe driver should do instead on install?
+                  pauseExecution(50) // dirty fix for: device sometimes isn't available yet for next step...maybe driver should do instead on install?
                   dev?.syncAttributes()
                }
                catch (com.hubitat.app.exception.UnknownDeviceTypeException ex) {
