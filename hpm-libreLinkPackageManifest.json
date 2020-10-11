@@ -78,6 +78,14 @@
 			"required": true
 		},
 		{
+			"id": "91a6039c-c32c-48a0-8a25-31abf91adb02",
+			"name": "LibreLink Motion/Humidity Sensor",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-motion-humidity-sensor.groovy",
+			"version": "0.9.0",
+			"required": true
+		},
+		{
 			"id": "a1d33952-c87a-48e3-a6e9-57dde49e306f",
 			"name": "LibreLink Motion/Lux Sensor",
 			"namespace": "RMoRobert",

@@ -24,7 +24,7 @@
  *
  * =======================================================================================
  *
- * Last modified: 2020-10-04
+ * Last modified: 2020-10-11
  *
  */
 
@@ -56,6 +56,7 @@ String getVersion() {
    "llSceneDimmer": [capability: "capability.switchLevel", displayName: "Scene Dimmers (Switch/Level and Buttons)", driver: "LibreLink Scene Dimmer"],
    "llRGBWBulbs": [capability: "capability.colorControl", displayName: "RGBW Bulbs", driver: "LibreLink RGBW Bulb"],
    "llMotions": [capability: "capability.motionSensor", displayName: "Motion sensors", driver: "LibreLink Motion Sensor"],
+   "llMotionHumids": [capability: "capability.motionSensor", displayName: "Motion/humidity sensors", driver: "LibreLink Motion/Humidity Sensor"]
    "llMotionLuxes": [capability: "capability.motionSensor", displayName: "Motion/lux sensors", driver: "LibreLink Motion/Lux Sensor"],
    "llContacts": [capability: "capability.contactSensor", displayName: "Contact sensors", driver: "LibreLink Contact Sensor"],
    "llWaters": [capability: "capability.waterSensor", displayName: "Water sensors", driver: "LibreLink Water Sensor"],
