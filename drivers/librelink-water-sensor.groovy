@@ -13,22 +13,24 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-10-11
+ *  Last modified: 2020-10-04
  *
  */ 
  
 metadata {
-   definition (name: "LibreLink Mobile App Device", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-mobile-app-device.groovy") {
-      capability "Actuator"
-      capability "Notification"
-      capability "PresenceSensor"
+   definition (name: "LibreLink Water Sensor", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-water-sensor.groovy") {
+      capability "Sensor"
+      capability "WaterSensor"
+      capability "TemperatureMeasurement"
+      capability "Battery"
+      capability "Refresh"
       
       command "syncAttributes"
    }
       
 preferences {
-      input name: "enableDebug", type: "bool", title: "Enable debug logging", defaultValue: true
-      input name: "enableDesc", type: "bool", title: "Enable descriptionText logging", defaultValue: true
+      input(name: "enableDebug", type: "bool", title: "Enable debug logging", defaultValue: true)
+      input(name: "enableDesc", type: "bool", title: "Enable descriptionText logging", defaultValue: true)
    }
 }
 
@@ -93,20 +95,7 @@ void syncAttributes() {
 
 /* ======== Device capability methods ======== */
 
-def arrived() {
-   if (enableDebug) log.debug "arrived()"
-   parent.sendCommandFromChildDevice(device.deviceNetworkId, "arrived")
+def refresh() {
+   if (enableDebug) log.debug "refresh()"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "refresh")
 }
-
-// Can uncomment if need for custom driver with these commands (also add as commands above):
-/*
-def departed() {
-   if (enableDebug) log.debug "departed()"
-   parent.sendCommandFromChildDevice(device.deviceNetworkId, "departed")
-}
-
-def deviceNotification(text) {
-   if (enableDebug) log.debug "deviceNotification($text)"
-   parent.sendCommandFromChildDevice(device.deviceNetworkId, "deviceNotification", [text])
-}
-*/

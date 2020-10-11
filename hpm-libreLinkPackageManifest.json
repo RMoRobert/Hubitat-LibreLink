@@ -132,6 +132,14 @@
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-thermostat.groovy",
 			"version": "0.9.0",
 			"required": true
-		}
+		},
+		{
+			"id": "26c96f5c-9299-4cd5-8406-e4ad31131125",
+			"name": "LibreLink Water Sensor",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-water-sensor.groovy",
+			"version": "0.9.0",
+			"required": true
+		},
 	]
 }
