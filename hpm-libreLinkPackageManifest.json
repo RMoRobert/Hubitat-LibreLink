@@ -148,6 +148,6 @@
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-water-sensor.groovy",
 			"version": "0.9.0",
 			"required": true
-		},
+		}
 	]
 }
