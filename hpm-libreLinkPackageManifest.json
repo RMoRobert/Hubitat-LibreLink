@@ -54,6 +54,22 @@
 			"required": true
 		},
 		{
+			"id": "08b1fc9c-aef6-4e94-ac09-88574c96e421",
+			"name": "LibreLink Fan",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-fan.groovy",
+			"version": "0.9.0",
+			"required": true
+		},
+		{
+			"id": "60f2cf90-dac4-4aa7-8004-8d755129eb26",
+			"name": "LibreLink Garage Door",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-garage-door.groovy",
+			"version": "0.9.0",
+			"required": true
+		},
+		{
 			"id": "42be25f5-8571-40b9-9ef3-1c9d9a5a8ad4",
 			"name": "LibreLink Linked Hub",
 			"namespace": "RMoRobert",
@@ -146,6 +162,14 @@
 			"name": "LibreLink Water Sensor",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-water-sensor.groovy",
+			"version": "0.9.0",
+			"required": true
+		},
+		{
+			"id": "e55591a8-5cdb-432f-9c09-0ef94152a43b",
+			"name": "LibreLink Window Shade",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-window-shade.groovy",
 			"version": "0.9.0",
 			"required": true
 		}

@@ -53,13 +53,15 @@ String getVersion() {
 
 @Field static Map linkableDevices =
 [
-   "Switches, Dimmers, Bulbs": [
+   "Switches, Dimmers, Shades, and Bulbs": [
       "llSwitches": [capability: "capability.switch", displayName: "Switches", driver: "LibreLink Switch"],
       "llDimmers": [capability: "capability.switchLevel", displayName: "Dimmers", driver: "LibreLink Dimmer"],
       "llSceneDimmer": [capability: "capability.switchLevel", displayName: "Scene Dimmers (Switch/Level and Buttons)", driver: "LibreLink Scene Dimmer"],
+      "llShades": [capability: "capability.windowShade", displayName: "Window shades", driver: "LibreLink Window Shade"],
+      "llFans": [capability: "capability.fanControl", displayName: "Fans", driver: "LibreLink Fan"],
       "llRGBWBulbs": [capability: "capability.colorControl", displayName: "RGBW Bulbs", driver: "LibreLink RGBW Bulb"]
    ],
-   "Sensors": [   
+   "Sensors": [
       "llContacts": [capability: "capability.contactSensor", displayName: "Contact sensors", driver: "LibreLink Contact Sensor"],
       "llMotions": [capability: "capability.motionSensor", displayName: "Motion sensors", driver: "LibreLink Motion Sensor"],
       "llMotionHumids": [capability: "capability.motionSensor", displayName: "Motion/humidity sensors", driver: "LibreLink Motion/Humidity Sensor"],
@@ -67,10 +69,13 @@ String getVersion() {
       "llTempHums": [capability: "capability.temperatureMeasurement", displayName: "Temperature/Humidity sensors", driver: "LibreLink Temperature/Humidity Sensor"],
       "llWaters": [capability: "capability.waterSensor", displayName: "Water sensors", driver: "LibreLink Water Sensor"]
    ],
-   "Buttons, Locks, Mobile App Devices, Thermostats": [
+   "Buttons and Mobile App Devices": [
       "llButtonsPHRDT": [capability: "capability.pushableButton", displayName: "Buttons (push/hold/release/double-tap)", driver: "LibreLink Button (Push/Hold/Release/Double-Tap)"],
+      "llMobileAppDevs": [capability: "capability.notification", displayName: "Mobile app devices", driver: "LibreLink Mobile App Device"]
+   ],
+   "Garage Doors, Locks, and Thermostats": [
+      "llGarageDoors": [capability: "capability.garageDoorControl", displayName: "Garage doors", driver: "LibreLink Garage Door"],
       "llLocks": [capability: "capability.lock", displayName: "Locks", driver: "LibreLink Lock"],
-      "llMobileAppDevs": [capability: "capability.notification", displayName: "Mobile app devices", driver: "LibreLink Mobile App Device"],
       "llThermostats": [capability: "capability.thermostat", displayName: "Thermostats", driver: "LibreLink Thermostat"]
    ]
 ]
