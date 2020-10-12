@@ -66,6 +66,7 @@ String getVersion() {
       "llMotions": [capability: "capability.motionSensor", displayName: "Motion sensors", driver: "LibreLink Motion Sensor"],
       "llMotionHumids": [capability: "capability.motionSensor", displayName: "Motion/humidity sensors", driver: "LibreLink Motion/Humidity Sensor"],
       "llMotionLuxes": [capability: "capability.motionSensor", displayName: "Motion/lux sensors", driver: "LibreLink Motion/Lux Sensor"],
+      "llSmokeCOs": [capability: "capability.smokeDetector", displayName: "Smoke/CO detectors", driver: "LibreLink Smoke/CO Detector"],
       "llTempHums": [capability: "capability.temperatureMeasurement", displayName: "Temperature/Humidity sensors", driver: "LibreLink Temperature/Humidity Sensor"],
       "llWaters": [capability: "capability.waterSensor", displayName: "Water sensors", driver: "LibreLink Water Sensor"]
    ],
