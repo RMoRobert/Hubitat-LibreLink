@@ -24,7 +24,7 @@
  *
  * =======================================================================================
  *
- * Last modified: 2020-10-11
+ * Last modified: 2020-10-15
  *
  */
 
@@ -55,6 +55,7 @@ String getVersion() {
 [
    "Switches, Dimmers, Shades, and Bulbs": [
       "llSwitches": [capability: "capability.switch", displayName: "Switches", driver: "LibreLink Switch"],
+      "llSwitchPowers": [capability: "capability.switch", displayName: "Switches with power metering", driver: "LibreLink Switch with Power"],
       "llDimmers": [capability: "capability.switchLevel", displayName: "Dimmers", driver: "LibreLink Dimmer"],
       "llSceneDimmer": [capability: "capability.switchLevel", displayName: "Scene Dimmers (Switch/Level and Buttons)", driver: "LibreLink Scene Dimmer"],
       "llShades": [capability: "capability.windowShade", displayName: "Window shades", driver: "LibreLink Window Shade"],
@@ -404,6 +405,13 @@ void subscribeToLinkedDevices() {
             settings[inputName].each { dev ->
                dev.getSupportedAttributes().each { attr ->
                   subscribe(dev, attr.name, handleDeviceEvent)
+                  // In the future, could make list of all attributes and filter out before subscription. For now I will just:
+                  // Filter out undesired attributes for specific devices (right now just switches not selected as "switch with power"):
+                  if (inputName) == "llSwitches" {
+                     unsubscribe(dev, "power", handleDeviceEvent)
+                     unsubscribe(dev, "energy", handleDeviceEvent)
+                     unsubscribe(dev, "voltage", handleDeviceEvent)
+                  }
                }
             }
          }
@@ -698,7 +706,7 @@ Map handleReceiveOtherHubDeviceEvent() {
    if (dev != null) {
       if (enableDebug) "Found device on this hub for ID ${params.deviceId}: ${dev.displayName}"
       Map eventAttributes = request?.JSON
-      log.debug "eventAttributes = $eventAttributes"
+      if (enableDebug) log.debug "eventAttributes = $eventAttributes"
       dev.doSendEvent(eventAttributes)
       success = true
    }

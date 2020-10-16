@@ -18,20 +18,20 @@
  */ 
  
 metadata {
-   definition (name: "LibreLink Dimmer", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-dimmer.groovy") {
+   definition (name: "LibreLink Switch with Power", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-switch-power.groovy") {
       capability "Actuator"
-      capability "Refresh"
       capability "Switch"
-      capability "SwitchLevel"
-      capability "ChangeLevel" // can comment out if don't want or devices don't support
-      capability "Light" // can comment out if problematic
+      capability "Refresh"
+      capability "PowerMeter"
+      capability "EnergyMeter" // can comment out if don't need energy attribute
+      capability "VoltageMeasurement" // can comment out if don't need voltage attribute
       
       command "syncAttributes"
    }
       
 preferences {
-      input name: "enableDebug", type: "bool", title: "Enable debug logging", defaultValue: true
-      input name: "enableDesc", type: "bool", title: "Enable descriptionText logging", defaultValue: true
+      input(name: "enableDebug", type: "bool", title: "Enable debug logging", defaultValue: true)
+      input(name: "enableDesc", type: "bool", title: "Enable descriptionText logging", defaultValue: true)
    }
 }
 
@@ -109,26 +109,4 @@ def on() {
 def off() {
    if (enableDebug) log.debug "off()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "off")
-}
-
-def setLevel(level) {
-   if (enableDebug) log.debug "setLevel($level)"
-   parent.sendCommandFromChildDevice(device.deviceNetworkId,
-      "setLevel", [level])
-}
-
-def setLevel(level, duration) {
-   if (enableDebug) log.debug "setLevel($level, $transitionTime)"
-   parent.sendCommandFromChildDevice(device.deviceNetworkId,
-      "setLevel", [level, (duration != null ? duration.toBigDecimal() : 1)])
-}
-
-def startLevelChange(direction) {
-   if (enableDebug) log.debug "startLevelChange($direction)"
-   parent.sendCommandFromChildDevice(device.deviceNetworkId, "startLevelChange", [direction])
-}
-
-def stopLevelChange() {
-   if (enableDebug) log.debug "stopLevelChange()"
-   parent.sendCommandFromChildDevice(device.deviceNetworkId, "stopLevelChange")
 }

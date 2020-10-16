@@ -2,7 +2,7 @@
 	"packageName": "LibreLink",
 	"minimumHEVersion": "2.1.0",
 	"author": "Robert Morris",
-	"dateReleased": "2020-10-11",
+	"dateReleased": "2020-10-14",
 	"communityLink": "",
 	"licenseFile": "https://www.apache.org/licenses/LICENSE-2.0.txt",
 	"releaseNotes": "",
@@ -138,6 +138,14 @@
 			"name": "LibreLink Smoke/CO Detector",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-smoke-co.groovy",
+			"version": "0.9.0",
+         "required": true
+      },
+		{
+         "id": "c239b74b-2abc-4ff0-9c6e-a0a2535d0f18",
+         "name": "LibreLink Switch with Power",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-switch-power.groovy",
 			"version": "0.9.0",
 			"required": true
 		},
