@@ -2,10 +2,10 @@
 	"packageName": "LibreLink",
 	"minimumHEVersion": "2.1.0",
 	"author": "Robert Morris",
-	"dateReleased": "2020-10-14",
+	"dateReleased": "2020-10-16",
 	"communityLink": "",
 	"licenseFile": "https://www.apache.org/licenses/LICENSE-2.0.txt",
-	"releaseNotes": "",
+	"releaseNotes": "Initial release - version 1.0",
 	"apps" : [
 		{
 			"id": "a0be9220-3af3-429a-9b2b-e9b42d4d46f6",
@@ -13,7 +13,7 @@
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/apps/librelink-parent-app.groovy",
 			"required": true,
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"primary": true,
 			"oauth": false
 		},
@@ -23,7 +23,7 @@
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/apps/librelink-child-linked-hub-app.groovy",
 			"required": true,
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"primary": false,
 			"oauth": true
 		}
@@ -34,7 +34,7 @@
 			"name": "LibreLink Button (Push/Hold/Release/Double-Tap)",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-button-push-hold-rel-dbl-temp.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -42,7 +42,7 @@
 			"name": "LibreLink Contact Sensor",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-contact-sensor.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -50,7 +50,7 @@
 			"name": "LibreLink Dimmer",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-dimmer.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -66,7 +66,7 @@
 			"name": "LibreLink Garage Door",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-garage-door.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -74,7 +74,7 @@
 			"name": "LibreLink Linked Hub",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-linked-hub.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -82,7 +82,7 @@
 			"name": "LibreLink Lock",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-lock.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -90,7 +90,7 @@
 			"name": "LibreLink Mobile App Device",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-mobile-app-device.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -98,7 +98,7 @@
 			"name": "LibreLink Motion/Humidity Sensor",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-motion-humidity-sensor.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -106,7 +106,7 @@
 			"name": "LibreLink Motion/Lux Sensor",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-motion-lux-sensor.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -114,7 +114,7 @@
 			"name": "LibreLink Motion Sensor",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-motion-sensor.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -122,7 +122,7 @@
 			"name": "LibreLink RGBW Bulb",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-rgbw-bulb.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -130,7 +130,7 @@
 			"name": "LibreLink Scene Dimmer",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-scene-dimmer.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -138,7 +138,7 @@
 			"name": "LibreLink Smoke/CO Detector",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-smoke-co.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
          "required": true
       },
 		{
@@ -146,7 +146,7 @@
          "name": "LibreLink Switch with Power",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-switch-power.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -154,7 +154,7 @@
 			"name": "LibreLink Switch",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-switch.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -162,7 +162,7 @@
 			"name": "LibreLink Temperature/Humidity Sensor",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-temp-humidity-sensor.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -170,7 +170,7 @@
 			"name": "LibreLink Thermostat",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-thermostat.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -178,7 +178,7 @@
 			"name": "LibreLink Water Sensor",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-water-sensor.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		},
 		{
@@ -186,7 +186,7 @@
 			"name": "LibreLink Window Shade",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-window-shade.groovy",
-			"version": "0.9.0",
+			"version": "1.0.0",
 			"required": true
 		}
 	]
