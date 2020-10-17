@@ -407,7 +407,7 @@ void subscribeToLinkedDevices() {
                   subscribe(dev, attr.name, handleDeviceEvent)
                   // In the future, could make list of all attributes and filter out before subscription. For now I will just:
                   // Filter out undesired attributes for specific devices (right now just switches not selected as "switch with power"):
-                  if (inputName) == "llSwitches" {
+                  if (inputName == "llSwitches") {
                      unsubscribe(dev, "power", handleDeviceEvent)
                      unsubscribe(dev, "energy", handleDeviceEvent)
                      unsubscribe(dev, "voltage", handleDeviceEvent)
