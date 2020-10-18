@@ -1,11 +1,11 @@
 {
 	"packageName": "LibreLink",
-	"minimumHEVersion": "2.1.0",
+	"minimumHEVersion": "2.1.2",
 	"author": "Robert Morris",
-	"dateReleased": "2020-10-16",
+	"dateReleased": "2020-10-17",
 	"communityLink": "",
 	"licenseFile": "https://www.apache.org/licenses/LICENSE-2.0.txt",
-	"releaseNotes": "Initial release - version 1.0",
+	"releaseNotes": "Initial release - version 1.0\n\n1.0.1 - Fix to unsubscribe from unselected device events when needed",
 	"apps" : [
 		{
 			"id": "a0be9220-3af3-429a-9b2b-e9b42d4d46f6",
@@ -23,7 +23,7 @@
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/apps/librelink-child-linked-hub-app.groovy",
 			"required": true,
-			"version": "1.0.0",
+			"version": "1.0.1",
 			"primary": false,
 			"oauth": true
 		}

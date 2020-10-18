@@ -57,7 +57,7 @@ String getVersion() {
       "llSwitches": [capability: "capability.switch", displayName: "Switches", driver: "LibreLink Switch"],
       "llSwitchPowers": [capability: "capability.switch", displayName: "Switches with power metering", driver: "LibreLink Switch with Power"],
       "llDimmers": [capability: "capability.switchLevel", displayName: "Dimmers", driver: "LibreLink Dimmer"],
-      "llSceneDimmer": [capability: "capability.switchLevel", displayName: "Scene Dimmers (Switch/Level and Buttons)", driver: "LibreLink Scene Dimmer"],
+      "llSceneDimmer": [capability: "capability.switch", displayName: "Scene Dimmers (Switch/Level and Buttons)", driver: "LibreLink Scene Dimmer"],
       "llShades": [capability: "capability.windowShade", displayName: "Window shades", driver: "LibreLink Window Shade"],
       "llFans": [capability: "capability.fanControl", displayName: "Fans", driver: "LibreLink Fan"],
       "llRGBWBulbs": [capability: "capability.colorControl", displayName: "RGBW Bulbs", driver: "LibreLink RGBW Bulb"]
@@ -400,6 +400,7 @@ void requestLinkedDeviceCreation() {
  * so can send to linked hub when needed
  */
 void subscribeToLinkedDevices() {
+   unsubscribe("handleDeviceEvent")
    linkableDevices.each { category -> 
       category.value.each { inputName, properties ->
          if (settings[inputName]) {
