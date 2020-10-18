@@ -13,14 +13,13 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-10-11
+ *  Last modified: 2020-10-17
  *
  */ 
  
 metadata {
-   definition (name: "LibreLink Mobile App Device", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-mobile-app-device.groovy") {
-      capability "Actuator"
-      capability "Notification"
+   definition (name: "LibreLink Presence Sensor", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-presence-sensor.groovy") {
+      capability "Sensor"
       capability "PresenceSensor"
       
       command "syncAttributes"
@@ -93,13 +92,7 @@ void syncAttributes() {
 
 /* ======== Device capability methods ======== */
 
-def deviceNotification(text) {
-   if (enableDebug) log.debug "deviceNotification($text)"
-   parent.sendCommandFromChildDevice(device.deviceNetworkId, "deviceNotification", [text])
-}
-
-// Can uncomment if need for custom driver with these commands (also add as commands above):
-/*
+/* Can uncomment or modify if needed for any devices with custom commands:
 def arrived() {
    if (enableDebug) log.debug "arrived()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "arrived")

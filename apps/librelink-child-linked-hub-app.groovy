@@ -73,6 +73,7 @@ String getVersion() {
    ],
    "Buttons and Mobile App Devices": [
       "llButtonsPHRDT": [capability: "capability.pushableButton", displayName: "Buttons (push/hold/release/double-tap)", driver: "LibreLink Button (Push/Hold/Release/Double-Tap)"],
+      "llPresences": [capability: "capability.presenceSensor", displayName: "Presence sensors", driver: "LibreLink Presence Sensor"],
       "llMobileAppDevs": [capability: "capability.notification", displayName: "Mobile app devices", driver: "LibreLink Mobile App Device"]
    ],
    "Garage Doors, Locks, and Thermostats": [

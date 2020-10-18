@@ -90,7 +90,7 @@
 			"name": "LibreLink Mobile App Device",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-mobile-app-device.groovy",
-			"version": "1.0.0",
+			"version": "1.0.1",
 			"required": true
 		},
 		{
@@ -114,6 +114,14 @@
 			"name": "LibreLink Motion Sensor",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-motion-sensor.groovy",
+			"version": "1.0.0",
+			"required": true
+		},
+		{
+			"id": "6a01fa99-4734-46a7-b109-d4deafd43cfe",
+			"name": "LibreLink Motion Sensor",
+			"namespace": "RMoRobert",
+			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-presence-sensor.groovy",
 			"version": "1.0.0",
 			"required": true
 		},
