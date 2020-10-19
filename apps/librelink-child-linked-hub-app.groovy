@@ -185,8 +185,7 @@ def pageAddHub() {
             if (settings["otherHubIP"] && settings["linkingKey"]) {
                Map linkingMap = [:]
                try {
-                  def tmp = parseJson(new String(URLDecoder.decode(linkingKey, "utf-8").decodeBase64()))
-                  linkingMap = tmp
+                  linkingMap = parseJson(new String(URLDecoder.decode(linkingKey, "utf-8").decodeBase64()))
                   state.otherHubAccessToken = linkingMap.token
                   state.otherHubUri = linkingMap.uri
                   // May use this key in the future, but for now just check and continue anyway:
@@ -194,6 +193,10 @@ def pageAddHub() {
                   if (!(linkingMap.hubType == "hubitat-local")) log.warn "Hub connection type not specified as local Hubitat. Ensure settings on other hub are correct."
                   if (state.otherHubAccessToken && state.otherHubUri) {
                      paragraph "<b>Press the button below</b> to establish a link between the two hubs, then use \"Test Connection\" on both hubs to ensure it is working:"
+                     if (!(state.otherHubUri.contains(otherHubIP)) && linkingMap.hubType == "hubitat-local") {
+                        // Not the most foolproof way to test, but should catch most cases^
+                        paragraph "Warning: the linking key IP address does not match the address entered for the other hub. Please verify both are correct and continue only if certain."
+                     }
                      input name: "btnLink", type: "button", title: "Link!"
                   }
                   else {
