@@ -23,10 +23,14 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-10-04
+ *  Last modified: 2020-10-29
  *
  */ 
- 
+
+import groovy.transform.Field
+
+@Field static final String version = "1.0.2"
+
 definition(
    name: "LibreLink",
    namespace: "RMoRobert",
@@ -42,7 +46,7 @@ definition(
 )
 
 String getVersion() {
-   return "0.9.0"
+   return version
 }
 
 preferences {

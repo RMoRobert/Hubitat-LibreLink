@@ -24,12 +24,17 @@
  *
  * =======================================================================================
  *
- * Last modified: 2020-10-16
+ * Last modified: 2020-10-29
+ *        
+ * 1.0    - First public release
+ * 1.0.1  - Fix to unsubscribe from device events if device un-selected
+ * 1.0.2  - Added more information (status) to HTTP errors; tweaked version reporting for apps (may be used in future)
  *
  */
 
-//import groovy.json.JsonSlurper
 import groovy.transform.Field
+
+@Field static final String version = "1.0.1"
 
 definition(
    name: "LibreLink (Linked Hub Child App)",
@@ -46,7 +51,7 @@ definition(
 )
 
 String getVersion() {
-   return "0.9.0"
+   return version
 }
 
 @Field static String childNamespace = "RMoRobert"
@@ -567,8 +572,7 @@ void handleGenericHTTPResponse(response, data) {
       if (enableDebug) log.debug "handleGenericHTTPResponse: response = ${response?.data}; data = \n ${data}"
    }
    else {
-      log.warn "HTTP ${response.status}:"
-      log.error "Error encountered by handleGenericHTTPResponse (data: $data). Error: ${response?.errorMessage}"
+      log.error "Error encountered by handleGenericHTTPResponse (data: $data). Error: ${response?.errorMessage}. HTTP ${response.status}"
    }
 }
 
