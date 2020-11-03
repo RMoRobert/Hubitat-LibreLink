@@ -2,10 +2,10 @@
 	"packageName": "LibreLink",
 	"minimumHEVersion": "2.1.2",
 	"author": "Robert Morris",
-	"dateReleased": "2020-10-29",
+	"dateReleased": "2020-11-02",
 	"communityLink": "",
 	"licenseFile": "https://www.apache.org/licenses/LICENSE-2.0.txt",
-	"releaseNotes": "Initial release - version 1.0\n\n1.0.1 - Fix to unsubscribe from unselected device events when needed\n\n1.0.2 - Improved logging of HTTP errors",
+	"releaseNotes": "Initial release - version 1.0\n\n1.0.1 - Fix to unsubscribe from unselected device events when needed\n1.0.2 - Improved logging of HTTP errors\n1.0.3 - Added motion-only (no temperature) driver",
 	"apps" : [
 		{
 			"id": "a0be9220-3af3-429a-9b2b-e9b42d4d46f6",
