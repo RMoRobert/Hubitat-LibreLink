@@ -24,17 +24,18 @@
  *
  * =======================================================================================
  *
- * Last modified: 2020-10-29
+ * Last modified: 2020-11-02
  *        
  * 1.0    - First public release
  * 1.0.1  - Fix to unsubscribe from device events if device un-selected
  * 1.0.2  - Added more information (status) to HTTP errors; tweaked version reporting for apps (may be used in future)
+ * 1.0.3  - Added motion-only driver
  *
  */
 
 import groovy.transform.Field
 
-@Field static final String version = "1.0.1"
+@Field static final String version = "1.0.3"
 
 definition(
    name: "LibreLink (Linked Hub Child App)",
@@ -69,7 +70,8 @@ String getVersion() {
    ],
    "Sensors": [
       "llContacts": [capability: "capability.contactSensor", displayName: "Contact sensors", driver: "LibreLink Contact Sensor"],
-      "llMotions": [capability: "capability.motionSensor", displayName: "Motion sensors", driver: "LibreLink Motion Sensor"],
+      "llMotions": [capability: "capability.motionSensor", displayName: "Motion sensors (motion/temperature/battery)", driver: "LibreLink Motion Sensor"],
+      "llMotionNoTemps": [capability: "capability.motionSensor", displayName: "Motion sensors (motion/battery)", driver: "LibreLink Motion (No Temp) Sensor"],
       "llMotionHumids": [capability: "capability.motionSensor", displayName: "Motion/humidity sensors", driver: "LibreLink Motion/Humidity Sensor"],
       "llMotionLuxes": [capability: "capability.motionSensor", displayName: "Motion/lux sensors", driver: "LibreLink Motion/Lux Sensor"],
       "llSmokeCOs": [capability: "capability.smokeDetector", displayName: "Smoke/CO detectors", driver: "LibreLink Smoke/CO Detector"],
