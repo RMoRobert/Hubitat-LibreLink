@@ -66,7 +66,7 @@ String getVersion() {
       "llDimmers": [capability: "capability.switchLevel", displayName: "Dimmers", driver: "LibreLink Dimmer"],
       "llSceneDimmer": [capability: "capability.switch", displayName: "Scene Dimmers (Switch/Level and Buttons)", driver: "LibreLink Scene Dimmer"],
       "llLZW30SN": [capability: "capability.switch", displayName: "Inovelli LZW30-SN Switches (with Advanced driver)", driver: "LibreLink Inovelli LZW30-SN Advanced (Switch)"],
-      "llLZW30SN": [capability: "capability.switch", displayName: "Inovelli LZW31-SN Dimmers (with Advanced driver)", driver: "LibreLink Inovelli LZW31-SN Advanced (Dimmer)"],      
+      "llLZW31SN": [capability: "capability.switch", displayName: "Inovelli LZW31-SN Dimmers (with Advanced driver)", driver: "LibreLink Inovelli LZW31-SN Advanced (Dimmer)"],      
       "llShades": [capability: "capability.windowShade", displayName: "Window shades", driver: "LibreLink Window Shade"],
       "llFans": [capability: "capability.fanControl", displayName: "Fans", driver: "LibreLink Fan"],
       "llRGBWBulbs": [capability: "capability.colorControl", displayName: "RGBW Bulbs", driver: "LibreLink RGBW Bulb"]
