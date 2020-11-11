@@ -18,7 +18,7 @@
  */ 
  
 metadata {
-   definition (name: "LibreLink Scene Dimmer", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-scene-dimmer.groovy") {
+   definition (name: "LibreLink Inovelli LZW31-SN Advanced (Dimmer)", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-inovelli-lzw31-sn-adv.groovy") {
       capability "Actuator"
       capability "Refresh"
       capability "Switch"
@@ -30,8 +30,21 @@ metadata {
       capability "DoubleTapableButton"
       capability "ReleasableButton"
 
-      // Can comment out if don't want this custom command:
-      command "setIndicator", [[name:"paramValue", type: "NUMBER", description: "Calculated indicator/notification LED value (intended only for Inovelli or other devices with this command)" ]]
+      command "flash"
+      command "push", [[name: "Button Number*", type: "NUMBER"]]
+      command "hold", [[name: "Button Number*", type: "NUMBER"]]
+      command "release", [[name: "Button Number*", type: "NUMBER"]]
+      command "setConfigParameter", [[name:"Parameter Number*", type: "NUMBER"], [name:"Value*", type: "NUMBER"], [name:"Size*", type: "NUMBER"]]
+      command "setIndicator", [[name: "Notification Value*", type: "NUMBER", description: "See https://nathanfiscus.github.io/inovelli-notification-calc to calculate"]]
+      command "setIndicator", [[name:"Color", type: "ENUM", constraints: ["red", "red-orange", "orange", "yellow", "green", "spring", "cyan", "azure", "blue", "violet", "magenta", "rose", "white"]],
+                               [name:"Level", type: "ENUM", description: "Level, 0-100", constraints: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]],
+                               [name:"Effect", type: "ENUM", description: "Effect name from list", constraints: ["off", "solid", "chase", "fast blink", "slow blink", "pulse"]],
+                               [name: "Duration", type: "NUMBER", description: "Duration in seconds, 1-254 or 255 for indefinite"]]
+      command "setLEDColor", [[name: "Color*", type: "NUMBER", description: "Inovelli format, 0-255"], [name: "Level", type: "NUMBER", description: "Inovelli format, 0-10"]]
+      command "setLEDColor", [[name: "Color*", type: "ENUM", description: "Color name (from list)", constraints: ["red", "red-orange", "orange", "yellow", "chartreuse", "green", "spring", "cyan", "azure", "blue", "violet", "magenta", "rose", "white"]],
+                              [name:"Level", type: "ENUM", description: "Level, 0-100", constraints: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]]]
+      command "setOnLEDLevel", [[name:"Level*", type: "ENUM", description: "Brightess (0-10, 0=off)", constraints: 0..10]]
+      command "setOffLEDLevel", [[name:"Level*", type: "ENUM", description: "Brightess (0-10, 0=off)", constraints: 0..10]]
       
       command "syncAttributes"
    }
@@ -163,4 +176,34 @@ def doubleTap(btnNum) {
 def setIndicator(paramValue) {
    if (enableDebug) log.debug "setIndicator($paramValue)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setIndicator", [paramValue])
+}
+
+def setIndicator(color, level, effect, duration) {
+   if (enableDebug) log.debug "setIndicator($color, $level, $effect, $duration)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "setIndicator", [color, level, effect, duration])
+}
+
+def setLEDColor(BigDecimal color, level) {
+   if (enableDebug) log.debug "setLEDColor(BigDecimal $color, $level)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "setLEDColor", [color, level])
+}
+
+def setLEDColor(String color, level) {
+   if (enableDebug) log.debug "setLEDColor(String $color, $level)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "setLEDColor", [color, level])
+}
+
+def setOnLEDLevel(level) {
+   if (enableDebug) log.debug "setOnLEDLevel($level)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "setOnLEDLevel", [level])
+}
+
+def setOffLEDLevel(level) {
+   if (enableDebug) log.debug "setOffLEDLevel($level)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "setOffLEDLevel", [level])
+}
+
+def setConfigParameter(paramNumber, value, size) {
+   if (enableDebug) log.debug "setConfigParameter($paramNumber, $value, $size)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "setConfigParameter", [paramNumber, value, size])
 }

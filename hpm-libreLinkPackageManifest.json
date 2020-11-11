@@ -13,7 +13,7 @@
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/apps/librelink-parent-app.groovy",
 			"required": true,
-			"version": "1.0.3",
+			"version": "1.0.2",
 			"primary": true,
 			"oauth": false
 		},
@@ -23,7 +23,7 @@
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/apps/librelink-child-linked-hub-app.groovy",
 			"required": true,
-			"version": "1.0.2",
+			"version": "1.0.4",
 			"primary": false,
 			"oauth": true
 		}
@@ -61,14 +61,30 @@
 			"version": "0.9.0",
 			"required": true
 		},
-		{
-			"id": "60f2cf90-dac4-4aa7-8004-8d755129eb26",
-			"name": "LibreLink Garage Door",
-			"namespace": "RMoRobert",
-			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-garage-door.groovy",
-			"version": "1.0.0",
-			"required": true
-		},
+      {
+         "id": "60f2cf90-dac4-4aa7-8004-8d755129eb26",
+         "name": "LibreLink Garage Door",
+         "namespace": "RMoRobert",
+         "location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-garage-door.groovy",
+         "version": "1.0.0",
+         "required": true
+      },
+      {
+         "id": "7d79c616-0609-48a5-916b-938ae38a2475",
+         "name": "LibreLink Inovelli LZW30-SN Advanced (Switch)",
+         "namespace": "RMoRobert",
+         "location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-inovelli-lzw30-sn-adv.groovy",
+         "version": "1.0.0",
+         "required": true
+      },
+      {
+         "id": "6c41a53e-7bf6-453b-b0fb-940076b0094f",
+         "name": "LibreLink Inovelli LZW31-SN Advanced (Dimmer)",
+         "namespace": "RMoRobert",
+         "location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-inovelli-lzw31-sn-adv.groovy",
+         "version": "1.0.0",
+         "required": true
+      },
 		{
 			"id": "42be25f5-8571-40b9-9ef3-1c9d9a5a8ad4",
 			"name": "LibreLink Linked Hub",
@@ -138,7 +154,7 @@
 			"name": "LibreLink Scene Dimmer",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-scene-dimmer.groovy",
-			"version": "1.0.0",
+			"version": "1.0.1",
 			"required": true
 		},
 		{

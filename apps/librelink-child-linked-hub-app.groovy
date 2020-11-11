@@ -30,12 +30,13 @@
  * 1.0.1  - Fix to unsubscribe from device events if device un-selected
  * 1.0.2  - Added more information (status) to HTTP errors; tweaked version reporting for apps (may be used in future)
  * 1.0.3  - Added motion-only driver
+ * 1.0.4  - Added Inovelli LZW30/31-SN drivers (should work with Hubitat driver and mostly Inovelli's but designed for RMoRobert "Advanced" driver); scene dimmer driver fixes
  *
  */
 
 import groovy.transform.Field
 
-@Field static final String version = "1.0.3"
+@Field static final String version = "1.0.4"
 
 definition(
    name: "LibreLink (Linked Hub Child App)",
@@ -64,6 +65,8 @@ String getVersion() {
       "llSwitchPowers": [capability: "capability.switch", displayName: "Switches with power metering", driver: "LibreLink Switch with Power"],
       "llDimmers": [capability: "capability.switchLevel", displayName: "Dimmers", driver: "LibreLink Dimmer"],
       "llSceneDimmer": [capability: "capability.switch", displayName: "Scene Dimmers (Switch/Level and Buttons)", driver: "LibreLink Scene Dimmer"],
+      "llLZW30SN": [capability: "capability.switch", displayName: "Inovelli LZW30-SN Switches (with Advanced driver)", driver: "LibreLink Inovelli LZW30-SN Advanced (Switch)"],
+      "llLZW30SN": [capability: "capability.switch", displayName: "Inovelli LZW31-SN Dimmers (with Advanced driver)", driver: "LibreLink Inovelli LZW31-SN Advanced (Dimmer)"],      
       "llShades": [capability: "capability.windowShade", displayName: "Window shades", driver: "LibreLink Window Shade"],
       "llFans": [capability: "capability.fanControl", displayName: "Fans", driver: "LibreLink Fan"],
       "llRGBWBulbs": [capability: "capability.colorControl", displayName: "RGBW Bulbs", driver: "LibreLink RGBW Bulb"]
