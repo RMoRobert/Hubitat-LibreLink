@@ -2,10 +2,10 @@
 	"packageName": "LibreLink",
 	"minimumHEVersion": "2.1.2",
 	"author": "Robert Morris",
-	"dateReleased": "2020-11-02",
+	"dateReleased": "2020-11-14",
 	"communityLink": "",
 	"licenseFile": "https://www.apache.org/licenses/LICENSE-2.0.txt",
-	"releaseNotes": "Initial release - version 1.0\n\n1.0.4 - Added Inovelli LZW30/31-SN-specific drivers\n1.0.3 - Added motion-only (no temperature) driver\n1.0.2 - Improved logging of HTTP errors\n1.0.1 - Fix to unsubscribe from unselected device events when needed",
+	"releaseNotes": "Initial release - version 1.0\n\n1.0.5 - Added Inovelli LZW36 (fan/light) driver, same note as below\n1.0.4 - Added Inovelli LZW30/31-SN-specific drivers\n1.0.3 - Added motion-only (no temperature) driver\n1.0.2 - Improved logging of HTTP errors\n1.0.1 - Fix to unsubscribe from unselected device events when needed",
 	"apps" : [
 		{
 			"id": "a0be9220-3af3-429a-9b2b-e9b42d4d46f6",
@@ -82,6 +82,14 @@
          "name": "LibreLink Inovelli LZW31-SN Advanced (Dimmer)",
          "namespace": "RMoRobert",
          "location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-inovelli-lzw31-sn-adv.groovy",
+         "version": "1.0.0",
+         "required": true
+      },
+      {
+         "id": "808506a0-6940-423b-bfa8-1aa991ba6e30",
+         "name": "LibreLink Inovelli LZW36 Advanced (Fan/Light)",
+         "namespace": "RMoRobert",
+         "location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-inovelli-lzw36-adv.groovy",
          "version": "1.0.0",
          "required": true
       },

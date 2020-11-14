@@ -24,19 +24,20 @@
  *
  * =======================================================================================
  *
- * Last modified: 2020-11-02
+ * Last modified: 2020-11-14
  *        
  * 1.0    - First public release
  * 1.0.1  - Fix to unsubscribe from device events if device un-selected
  * 1.0.2  - Added more information (status) to HTTP errors; tweaked version reporting for apps (may be used in future)
  * 1.0.3  - Added motion-only driver
  * 1.0.4  - Added Inovelli LZW30/31-SN drivers (should work with Hubitat driver and mostly Inovelli's but designed for RMoRobert "Advanced" driver); scene dimmer driver fixes
+ * 1.0.5  - Added Inovelli LZW36 drivers (same note as LZW30/31-SN)
  *
  */
 
 import groovy.transform.Field
 
-@Field static final String version = "1.0.4"
+@Field static final String version = "1.0.5"
 
 definition(
    name: "LibreLink (Linked Hub Child App)",
@@ -66,7 +67,8 @@ String getVersion() {
       "llDimmers": [capability: "capability.switchLevel", displayName: "Dimmers", driver: "LibreLink Dimmer"],
       "llSceneDimmer": [capability: "capability.switch", displayName: "Scene Dimmers (Switch/Level and Buttons)", driver: "LibreLink Scene Dimmer"],
       "llLZW30SN": [capability: "capability.switch", displayName: "Inovelli LZW30-SN Switches (with Advanced driver)", driver: "LibreLink Inovelli LZW30-SN Advanced (Switch)"],
-      "llLZW31SN": [capability: "capability.switch", displayName: "Inovelli LZW31-SN Dimmers (with Advanced driver)", driver: "LibreLink Inovelli LZW31-SN Advanced (Dimmer)"],      
+      "llLZW31SN": [capability: "capability.switchLevel", displayName: "Inovelli LZW31-SN Dimmers (with Advanced driver)", driver: "LibreLink Inovelli LZW31-SN Advanced (Dimmer)"],      
+      "llLZW36": [capability: "capability.switchLevel", displayName: "Inovelli LZW36 Fan/Lights (with Advanced driver)", driver: "LibreLink Inovelli LZW36 Advanced (Fan/Light)"],      
       "llShades": [capability: "capability.windowShade", displayName: "Window shades", driver: "LibreLink Window Shade"],
       "llFans": [capability: "capability.fanControl", displayName: "Fans", driver: "LibreLink Fan"],
       "llRGBWBulbs": [capability: "capability.colorControl", displayName: "RGBW Bulbs", driver: "LibreLink RGBW Bulb"]
