@@ -37,7 +37,7 @@
 
 import groovy.transform.Field
 
-@Field static final String version = "1.0.5"
+@Field static final String version = "1.0.6"
 
 definition(
    name: "LibreLink (Linked Hub Child App)",
@@ -88,9 +88,10 @@ String getVersion() {
       "llPresences": [capability: "capability.presenceSensor", displayName: "Presence sensors", driver: "LibreLink Presence Sensor"],
       "llMobileAppDevs": [capability: "capability.notification", displayName: "Mobile app devices", driver: "LibreLink Mobile App Device"]
    ],
-   "Garage Doors, Locks, and Thermostats": [
+   "Garage Doors, Locks, Sirens, and Thermostats": [
       "llGarageDoors": [capability: "capability.garageDoorControl", displayName: "Garage doors", driver: "LibreLink Garage Door"],
       "llLocks": [capability: "capability.lock", displayName: "Locks", driver: "LibreLink Lock"],
+      "llDomeSirens": [capability: "capability.alarm", displayName: "Locks", driver: "LibreLink Dome Siren"],
       "llThermostats": [capability: "capability.thermostat", displayName: "Thermostats", driver: "LibreLink Thermostat"]
    ]
 ]

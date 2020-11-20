@@ -5,7 +5,7 @@
 	"dateReleased": "2020-11-19",
 	"communityLink": "",
 	"licenseFile": "https://www.apache.org/licenses/LICENSE-2.0.txt",
-	"releaseNotes": "Initial release - version 1.0\n\n1.0.5 - Fixed typo in motion-only and presence driver in HPM manifest\nAdded Inovelli LZW36 (fan/light) driver, same note as below\n1.0.4 - Added Inovelli LZW30/31-SN-specific drivers\n1.0.3 - Added motion-only (no temperature) driver\n1.0.2 - Improved logging of HTTP errors\n1.0.1 - Fix to unsubscribe from unselected device events when needed",
+	"releaseNotes": "Initial release - version 1.0\n\n1.0.6 - Added Dome Siren driver\n1.0.5 - Fixed typo in motion-only and presence driver in HPM manifest\nAdded Inovelli LZW36 (fan/light) driver, same note as below\n1.0.4 - Added Inovelli LZW30/31-SN-specific drivers\n1.0.3 - Added motion-only (no temperature) driver\n1.0.2 - Improved logging of HTTP errors\n1.0.1 - Fix to unsubscribe from unselected device events when needed",
 	"apps" : [
 		{
 			"id": "a0be9220-3af3-429a-9b2b-e9b42d4d46f6",
@@ -45,14 +45,22 @@
 			"version": "1.0.0",
 			"required": true
 		},
-		{
-			"id": "fa4f71f7-eab3-4f86-9b19-6286baa17b93",
-			"name": "LibreLink Dimmer",
-			"namespace": "RMoRobert",
-			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-dimmer.groovy",
-			"version": "1.0.0",
-			"required": true
-		},
+      {
+         "id": "fa4f71f7-eab3-4f86-9b19-6286baa17b93",
+         "name": "LibreLink Dimmer",
+         "namespace": "RMoRobert",
+         "location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-dimmer.groovy",
+         "version": "1.0.0",
+         "required": true
+      },
+      {
+         "id": "bceb80ae-f55a-427c-a266-1a63adc0b099",
+         "name": "LibreLink Dome Siren",
+         "namespace": "RMoRobert",
+         "location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-dome-siren.groovy",
+         "version": "1.0.0",
+         "required": true
+      },
 		{
 			"id": "08b1fc9c-aef6-4e94-ac09-88574c96e421",
 			"name": "LibreLink Fan",
