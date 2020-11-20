@@ -23,7 +23,7 @@
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/apps/librelink-child-linked-hub-app.groovy",
 			"required": true,
-			"version": "1.0.4",
+			"version": "1.0.6",
 			"primary": false,
 			"oauth": true
 		}

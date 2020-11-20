@@ -32,6 +32,7 @@
  * 1.0.3  - Added motion-only driver
  * 1.0.4  - Added Inovelli LZW30/31-SN drivers (should work with Hubitat driver and mostly Inovelli's but designed for RMoRobert "Advanced" driver); scene dimmer driver fixes
  * 1.0.5  - Added Inovelli LZW36 drivers (same note as LZW30/31-SN)
+ * 1.0.6  - Added Dome Siren driver
  *
  */
 
@@ -91,7 +92,7 @@ String getVersion() {
    "Garage Doors, Locks, Sirens, and Thermostats": [
       "llGarageDoors": [capability: "capability.garageDoorControl", displayName: "Garage doors", driver: "LibreLink Garage Door"],
       "llLocks": [capability: "capability.lock", displayName: "Locks", driver: "LibreLink Lock"],
-      "llDomeSirens": [capability: "capability.alarm", displayName: "Locks", driver: "LibreLink Dome Siren"],
+      "llDomeSirens": [capability: "capability.alarm", displayName: "Dome Sirens", driver: "LibreLink Dome Siren"],
       "llThermostats": [capability: "capability.thermostat", displayName: "Thermostats", driver: "LibreLink Thermostat"]
    ]
 ]
