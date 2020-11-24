@@ -13,7 +13,7 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-10-10
+ *  Last modified: 2020-11-23
  *
  */ 
  
@@ -39,17 +39,17 @@ preferences {
 
 /* ======== General device and convenience methods ======== */
 
-def installed(){
+void installed(){
    log.debug "Installed..."
    initialize()
 }
 
-def updated() {
+void updated() {
    if (enableDebug) log.debug "Updated..."
    initialize()
 }
 
-def initialize() {
+void initialize() {
    if (enableDebug) log.debug "Initializing"
    int disableMinutes = 30
    if (enableDebug) {
@@ -75,7 +75,7 @@ void debugOff() {
 
 void doSendEvent(Map eventData, Boolean forceStateChange=false) {
    if (enableDebug) log.debug("doSendEvent(${eventData}...")
-   def descriptionText = "${device.displayName} ${eventData.name} is ${eventData.value}${eventData.unit ?: ''}"
+   String descriptionText = "${device.displayName} ${eventData.name} is ${eventData.value}${eventData.unit ?: ''}"
    if (enableDesc && (device.currentValue(eventData.name) != eventData.value || eventData.isStateChange)) log.info(descriptionText)
    Map eventProperties = [name: eventData.name, value: eventData.value, descriptionText: descriptionText,
       unit: eventData.unit, phyiscal: eventData.physical, digital: eventData.digital,
@@ -85,7 +85,7 @@ void doSendEvent(Map eventData, Boolean forceStateChange=false) {
 }
 
 // Probably won't happen but...
-def parse(String description) {
+void parse(String description) {
    log.warn "parse() not implemented: '${description}'"
 }
 
@@ -98,37 +98,37 @@ void syncAttributes() {
 
 /* ======== Device capability methods ======== */
 
-def refresh() {
+void refresh() {
    if (enableDebug) log.debug "refresh()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "refresh")
 }
 
-def lock() {
+void lock() {
    if (enableDebug) log.debug "lock()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "lock")
 }
 
-def unlock() {
+void unlock() {
    if (enableDebug) log.debug "unlock()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "unlock")
 }
 
-def deleteCode(codePosition) {
+void deleteCode(codePosition) {
    if (enableDebug) log.debug "deleteCode($codePosition)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "deleteCode", [codePosition])
 }
 
-def getCodes() {
+void getCodes() {
    if (enableDebug) log.debug "getCodes()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "getCodes")
 }
 
-def setCode(codePosition, pinCode, name) {
+void setCode(codePosition, pinCode, name) {
    if (enableDebug) log.debug "setCode($codePosition, $pinCode, $name)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setCode", [codePosition, pinCode, name])
 }
 
-def setCodeLength(codeLength) {
+void setCodeLength(codeLength) {
    if (enableDebug) log.debug "setCodeLength($codeLength)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setCodeLength", [codeLength])
 }

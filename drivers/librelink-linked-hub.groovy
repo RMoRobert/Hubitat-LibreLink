@@ -13,7 +13,7 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-10-11
+ *  Last modified: 2020-11-23
  *
  */ 
  
@@ -32,17 +32,17 @@ metadata {
 
 /* ======== General device and convenience methods ======== */
 
-def installed(){
+void installed(){
    log.debug "Installed..."
    initialize()
 }
 
-def updated() {
+void updated() {
    log.debug "Updated..."
    initialize()
 }
 
-def initialize() {
+void initialize() {
    log.debug "Initializing"
    int disableMinutes = 30
    if (enableDebug) {
@@ -68,7 +68,7 @@ void debugOff() {
 
 void doSendEvent(eventName, eventValue, eventUnit=null, forceStateChange=false) {
    if (enableDebug) log.debug "doSendEvent($eventName, $eventValue, $eventUnit)..."
-   def descriptionText = "${device.displayName} ${eventName} is ${eventValue}${eventUnit ?: ''}"
+   String descriptionText = "${device.displayName} ${eventName} is ${eventValue}${eventUnit ?: ''}"
    if (enableDesc) log.info descriptionText
    Map eventProperties = [name: eventName, value: eventValue, descriptionText: description]
    if (eventUnit != null) eventProperties["unit"] = eventUnit
@@ -77,13 +77,13 @@ void doSendEvent(eventName, eventValue, eventUnit=null, forceStateChange=false) 
 }
 
 // Probably won't happen but...
-def parse(String description) {
+void parse(String description) {
    log.warn("Running unimplemented parse for: '${description}'")
 }
 
 /* ======== Device capability methods ======== */
 
-def refresh() {
+void refresh() {
    // For hub device, just tries to "ping" other hub via parent app and see if online; app will
    // update the presence attribute for this device accordingly
    if (enableDebug) log.debug "refresh()"

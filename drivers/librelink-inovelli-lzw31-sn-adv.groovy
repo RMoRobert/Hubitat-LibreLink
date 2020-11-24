@@ -13,7 +13,7 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-11-10
+ *  Last modified: 2020-11-23
  *
  */ 
  
@@ -57,17 +57,17 @@ preferences {
 
 /* ======== General device and convenience methods ======== */
 
-def installed(){
+void installed(){
    log.debug "Installed..."
    initialize()
 }
 
-def updated() {
+void updated() {
    if (enableDebug) log.debug "Updated..."
    initialize()
 }
 
-def initialize() {
+void initialize() {
    if (enableDebug) log.debug "Initializing"
    int disableMinutes = 30
    if (enableDebug) {
@@ -93,7 +93,7 @@ void debugOff() {
 
 void doSendEvent(Map eventData, Boolean forceStateChange=false) {
    if (enableDebug) log.debug("doSendEvent(${eventData}...")
-   def descriptionText = "${device.displayName} ${eventData.name} is ${eventData.value}${eventData.unit ?: ''}"
+   String descriptionText = "${device.displayName} ${eventData.name} is ${eventData.value}${eventData.unit ?: ''}"
    if (enableDesc && (device.currentValue(eventData.name) != eventData.value || eventData.isStateChange)) log.info(descriptionText)
    Map eventProperties = [name: eventData.name, value: eventData.value, descriptionText: descriptionText,
       unit: eventData.unit, phyiscal: eventData.physical, digital: eventData.digital,
@@ -103,7 +103,7 @@ void doSendEvent(Map eventData, Boolean forceStateChange=false) {
 }
 
 // Probably won't happen but...
-def parse(String description) {
+void parse(String description) {
    log.warn "parse() not implemented: '${description}'"
 }
 
@@ -116,94 +116,94 @@ void syncAttributes() {
 
 /* ======== Device capability methods ======== */
 
-def refresh() {
+void refresh() {
    if (enableDebug) log.debug "refresh()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "refresh")
 }
 
-def on() {
+void on() {
    if (enableDebug) log.debug "on()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "on")
 }
 
-def off() {
+void off() {
    if (enableDebug) log.debug "off()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "off")
 }
 
-def setLevel(level) {
+void setLevel(level) {
    if (enableDebug) log.debug "setLevel($level)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId,
       "setLevel", [level])
 }
 
-def setLevel(level, duration) {
+void setLevel(level, duration) {
    if (enableDebug) log.debug "setLevel($level, $transitionTime)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId,
       "setLevel", [level, (duration != null ? duration.toBigDecimal() : 1)])
 }
 
-def startLevelChange(direction) {
+void startLevelChange(direction) {
    if (enableDebug) log.debug "startLevelChange($direction)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "startLevelChange", [direction])
 }
 
-def stopLevelChange() {
+void stopLevelChange() {
    if (enableDebug) log.debug "stopLevelChange()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "stopLevelChange")
 }
 
-def push(btnNum) {
+void push(btnNum) {
    if (enableDebug) log.debug "push($btnNum)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "push", [btnNum])
 }
 
-def hold(btnNum) {
+void hold(btnNum) {
    if (enableDebug) log.debug "hold($btnNum)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "hold", [btnNum])
 }
 
-def release(btnNum) {
+void release(btnNum) {
    if (enableDebug) log.debug "release($btnNum)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "release", [btnNum])
 }
 
-def doubleTap(btnNum) {
+void doubleTap(btnNum) {
    if (enableDebug) log.debug "doubleTap($btnNum)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "doubleTap", [btnNum])
 }
 
-def setIndicator(paramValue) {
+void setIndicator(paramValue) {
    if (enableDebug) log.debug "setIndicator($paramValue)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setIndicator", [paramValue])
 }
 
-def setIndicator(color, level, effect, duration) {
+void setIndicator(color, level, effect, duration) {
    if (enableDebug) log.debug "setIndicator($color, $level, $effect, $duration)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setIndicator", [color, level, effect, duration])
 }
 
-def setLEDColor(BigDecimal color, level) {
+void setLEDColor(BigDecimal color, level) {
    if (enableDebug) log.debug "setLEDColor(BigDecimal $color, $level)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setLEDColor", [color, level])
 }
 
-def setLEDColor(String color, level) {
+void setLEDColor(String color, level) {
    if (enableDebug) log.debug "setLEDColor(String $color, $level)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setLEDColor", [color, level])
 }
 
-def setOnLEDLevel(level) {
+void setOnLEDLevel(level) {
    if (enableDebug) log.debug "setOnLEDLevel($level)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setOnLEDLevel", [level])
 }
 
-def setOffLEDLevel(level) {
+void setOffLEDLevel(level) {
    if (enableDebug) log.debug "setOffLEDLevel($level)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setOffLEDLevel", [level])
 }
 
-def setConfigParameter(paramNumber, value, size) {
+void setConfigParameter(paramNumber, value, size) {
    if (enableDebug) log.debug "setConfigParameter($paramNumber, $value, $size)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setConfigParameter", [paramNumber, value, size])
 }

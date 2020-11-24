@@ -13,7 +13,7 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-10-17
+ *  Last modified: 2020-11-23
  *
  */ 
  
@@ -33,17 +33,17 @@ preferences {
 
 /* ======== General device and convenience methods ======== */
 
-def installed(){
+void installed(){
    log.debug "Installed..."
    initialize()
 }
 
-def updated() {
+void updated() {
    if (enableDebug) log.debug "Updated..."
    initialize()
 }
 
-def initialize() {
+void initialize() {
    if (enableDebug) log.debug "Initializing"
    int disableMinutes = 30
    if (enableDebug) {
@@ -69,7 +69,7 @@ void debugOff() {
 
 void doSendEvent(Map eventData, Boolean forceStateChange=false) {
    if (enableDebug) log.debug("doSendEvent(${eventData}...")
-   def descriptionText = "${device.displayName} ${eventData.name} is ${eventData.value}${eventData.unit ?: ''}"
+   String descriptionText = "${device.displayName} ${eventData.name} is ${eventData.value}${eventData.unit ?: ''}"
    if (enableDesc && (device.currentValue(eventData.name) != eventData.value || eventData.isStateChange)) log.info(descriptionText)
    Map eventProperties = [name: eventData.name, value: eventData.value, descriptionText: descriptionText,
       unit: eventData.unit, phyiscal: eventData.physical, digital: eventData.digital,
@@ -79,7 +79,7 @@ void doSendEvent(Map eventData, Boolean forceStateChange=false) {
 }
 
 // Probably won't happen but...
-def parse(String description) {
+void parse(String description) {
    log.warn "parse() not implemented: '${description}'"
 }
 
@@ -93,12 +93,12 @@ void syncAttributes() {
 /* ======== Device capability methods ======== */
 
 /* Can uncomment or modify if needed for any devices with custom commands:
-def arrived() {
+void arrived() {
    if (enableDebug) log.debug "arrived()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "arrived")
 }
 
-def departed() {
+void departed() {
    if (enableDebug) log.debug "departed()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "departed")
 }

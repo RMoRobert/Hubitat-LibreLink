@@ -13,7 +13,7 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-10-11
+ *  Last modified: 2020-11-23
  *
  */ 
  
@@ -23,9 +23,7 @@ metadata {
       capability "Refresh"
       capability "Switch"
       capability "FanControl"
-      // The following capability is commented out by default but can be uncommented if neeeded
-      // for your devices (necessary commands are already implemented below):
-      //capability "SwitchLevel"
+      // NOTE: For "SwitchLevel", use "Fan (with Level)" driver
       
       command "syncAttributes"
    }
@@ -38,17 +36,17 @@ preferences {
 
 /* ======== General device and convenience methods ======== */
 
-def installed(){
+void installed(){
    log.debug "Installed..."
    initialize()
 }
 
-def updated() {
+void updated() {
    if (enableDebug) log.debug "Updated..."
    initialize()
 }
 
-def initialize() {
+void initialize() {
    if (enableDebug) log.debug "Initializing"
    int disableMinutes = 30
    if (enableDebug) {
@@ -74,7 +72,7 @@ void debugOff() {
 
 void doSendEvent(Map eventData, Boolean forceStateChange=false) {
    if (enableDebug) log.debug("doSendEvent(${eventData}...")
-   def descriptionText = "${device.displayName} ${eventData.name} is ${eventData.value}${eventData.unit ?: ''}"
+   String descriptionText = "${device.displayName} ${eventData.name} is ${eventData.value}${eventData.unit ?: ''}"
    if (enableDesc && (device.currentValue(eventData.name) != eventData.value || eventData.isStateChange)) log.info(descriptionText)
    Map eventProperties = [name: eventData.name, value: eventData.value, descriptionText: descriptionText,
       unit: eventData.unit, phyiscal: eventData.physical, digital: eventData.digital,
@@ -84,7 +82,7 @@ void doSendEvent(Map eventData, Boolean forceStateChange=false) {
 }
 
 // Probably won't happen but...
-def parse(String description) {
+void parse(String description) {
    log.warn "parse() not implemented: '${description}'"
 }
 
@@ -97,22 +95,22 @@ void syncAttributes() {
 
 /* ======== Device capability methods ======== */
 
-def refresh() {
+void refresh() {
    if (enableDebug) log.debug "refresh()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "refresh")
 }
 
-def on() {
+void on() {
    if (enableDebug) log.debug "on()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "on")
 }
 
-def off() {
+void off() {
    if (enableDebug) log.debug "off()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "off")
 }
 
-def setSpeed(speed) {
+void setSpeed(speed) {
    if (enableDebug) log.debug "setSpeed($speed)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setSpeed", [speed])
 }
@@ -120,7 +118,7 @@ def setSpeed(speed) {
 // The following command is not technically neeeded as-is but would be if the
 // SwitchLevel capability is un-commented, as some users may need to do for compatibility
 // reasons:
-def setLevel(level, duration=null) {
+void setLevel(level, duration=null) {
    if (enableDebug) log.debug "setLevel($level, $transitionTime)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId,
       "setLevel", [level, (duration ?: 1)])

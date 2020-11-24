@@ -24,7 +24,7 @@
  *
  * =======================================================================================
  *
- * Last modified: 2020-11-14
+ * Last modified: 2020-11-23
  *        
  * 1.0    - First public release
  * 1.0.1  - Fix to unsubscribe from device events if device un-selected
@@ -33,12 +33,13 @@
  * 1.0.4  - Added Inovelli LZW30/31-SN drivers (should work with Hubitat driver and mostly Inovelli's but designed for RMoRobert "Advanced" driver); scene dimmer driver fixes
  * 1.0.5  - Added Inovelli LZW36 drivers (same note as LZW30/31-SN)
  * 1.0.6  - Added Dome Siren driver
+ * 1.1    - New drivers (pushed/held/released buttion, motion/4-in-1, fan and shade with "level"), performance improvements
  *
  */
 
 import groovy.transform.Field
 
-@Field static final String version = "1.0.6"
+@Field static final String version = "1.1.0"
 
 definition(
    name: "LibreLink (Linked Hub Child App)",
@@ -68,9 +69,10 @@ String getVersion() {
       "llDimmers": [capability: "capability.switchLevel", displayName: "Dimmers", driver: "LibreLink Dimmer"],
       "llSceneDimmer": [capability: "capability.switch", displayName: "Scene Dimmers (Switch/Level and Buttons)", driver: "LibreLink Scene Dimmer"],
       "llLZW30SN": [capability: "capability.switch", displayName: "Inovelli LZW30-SN Switches (with Advanced driver)", driver: "LibreLink Inovelli LZW30-SN Advanced (Switch)"],
-      "llLZW31SN": [capability: "capability.switchLevel", displayName: "Inovelli LZW31-SN Dimmers (with Advanced driver)", driver: "LibreLink Inovelli LZW31-SN Advanced (Dimmer)"],      
-      "llLZW36": [capability: "capability.switchLevel", displayName: "Inovelli LZW36 Fan/Lights (with Advanced driver)", driver: "LibreLink Inovelli LZW36 Advanced (Fan/Light)"],      
+      "llLZW31SN": [capability: "capability.switchLevel", displayName: "Inovelli LZW31-SN Dimmers (with Advanced driver)", driver: "LibreLink Inovelli LZW31-SN Advanced (Dimmer)"],
+      "llLZW36": [capability: "capability.switchLevel", displayName: "Inovelli LZW36 Fan/Lights (with Advanced driver)", driver: "LibreLink Inovelli LZW36 Advanced (Fan/Light)"],
       "llShades": [capability: "capability.windowShade", displayName: "Window shades", driver: "LibreLink Window Shade"],
+      "llShadesWithLevel": [capability: "capability.windowShade", displayName: "Window shades (with Level)", driver: "LibreLink Window Shade (with Level)"],
       "llFans": [capability: "capability.fanControl", displayName: "Fans", driver: "LibreLink Fan"],
       "llRGBWBulbs": [capability: "capability.colorControl", displayName: "RGBW Bulbs", driver: "LibreLink RGBW Bulb"]
    ],
@@ -78,14 +80,16 @@ String getVersion() {
       "llContacts": [capability: "capability.contactSensor", displayName: "Contact sensors", driver: "LibreLink Contact Sensor"],
       "llMotions": [capability: "capability.motionSensor", displayName: "Motion sensors (motion/temperature/battery)", driver: "LibreLink Motion Sensor"],
       "llMotionNoTemps": [capability: "capability.motionSensor", displayName: "Motion sensors (motion/battery)", driver: "LibreLink Motion (No Temp) Sensor"],
-      "llMotionHumids": [capability: "capability.motionSensor", displayName: "Motion/humidity sensors", driver: "LibreLink Motion/Humidity Sensor"],
-      "llMotionLuxes": [capability: "capability.motionSensor", displayName: "Motion/lux sensors", driver: "LibreLink Motion/Lux Sensor"],
+      "llMotionHumids": [capability: "capability.motionSensor", displayName: "Motion/humidity sensors (motion/temperature/humidity/battery)", driver: "LibreLink Motion/Humidity Sensor"],
+      "llMotionLuxes": [capability: "capability.motionSensor", displayName: "Motion/lux sensors (motion/temperture/illuminance/battery)", driver: "LibreLink Motion/Lux Sensor"],
+      "llMotion4in1s": [capability: "capability.motionSensor", displayName: "Motion/4-in-1 sensors (motion/temperture/humidity/illuminance/battery)", driver: "LibreLink Motion/4-in-1 Sensor"],
       "llSmokeCOs": [capability: "capability.smokeDetector", displayName: "Smoke/CO detectors", driver: "LibreLink Smoke/CO Detector"],
       "llTempHums": [capability: "capability.temperatureMeasurement", displayName: "Temperature/Humidity sensors", driver: "LibreLink Temperature/Humidity Sensor"],
       "llWaters": [capability: "capability.waterSensor", displayName: "Water sensors", driver: "LibreLink Water Sensor"]
    ],
    "Buttons and Mobile App Devices": [
-      "llButtonsPHRDT": [capability: "capability.pushableButton", displayName: "Buttons (push/hold/release/double-tap)", driver: "LibreLink Button (Push/Hold/Release/Double-Tap)"],
+      "llButtonsPHRDT": [capability: "capability.doubleTapableButton", displayName: "Buttons (push/hold/release/double-tap, temperature)", driver: "LibreLink Button (Push/Hold/Release/Double-Tap)"],
+      "llButtonsPHR": [capability: "capability.pushableButton", displayName: "Buttons (push/hold/release)", driver: "LibreLink Button (Push/Hold/Release)"],
       "llPresences": [capability: "capability.presenceSensor", displayName: "Presence sensors", driver: "LibreLink Presence Sensor"],
       "llMobileAppDevs": [capability: "capability.notification", displayName: "Mobile app devices", driver: "LibreLink Mobile App Device"]
    ],
@@ -106,12 +110,12 @@ preferences {
    page name: "pageTestConnection", content: "pageTestConnection"
 }
 
-def installed() {
+void installed() {
    log.debug "installed()"
    initialize()
 }
 
-def uninstalled() {
+void uninstalled() {
    log.debug "uninstalled()"
    if (!(settings["preserveDevices"] == true)) {
       log.debug "Deleting child devices of this ${app.name} child app instance..."
@@ -123,7 +127,7 @@ def uninstalled() {
    }
 }
 
-def updated() {
+void updated() {
    log.debug "update()"
    app.updateLabel("${app.name - ' Child'}" + (otherHubNickname ? " - ${otherHubNickname}" : ""))
    initialize()
@@ -132,7 +136,7 @@ def updated() {
    requestLinkedDeviceCreation()
 }
 
-def initialize() {
+void initialize() {
    log.debug "initialize()"
    initializeAppEndpoint()
 }

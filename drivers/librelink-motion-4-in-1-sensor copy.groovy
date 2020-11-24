@@ -18,17 +18,21 @@
  */ 
  
 metadata {
-   definition (name: "LibreLink Mobile App Device", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-mobile-app-device.groovy") {
-      capability "Actuator"
-      capability "Notification"
-      capability "PresenceSensor"
+   definition (name: "LibreLink Motion/4-in-1 Sensor", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-motion-4-in-1-sensor.groovy") {
+      capability "Sensor"
+      capability "MotionSensor"
+      capability "TemperatureMeasurement"
+      capability "IlluminanceMeasurement"
+      capability "RelativeHumidityMeasurement"
+      capability "Battery"
+      capability "Refresh"
       
       command "syncAttributes"
    }
       
 preferences {
-      input name: "enableDebug", type: "bool", title: "Enable debug logging", defaultValue: true
-      input name: "enableDesc", type: "bool", title: "Enable descriptionText logging", defaultValue: true
+      input(name: "enableDebug", type: "bool", title: "Enable debug logging", defaultValue: true)
+      input(name: "enableDesc", type: "bool", title: "Enable descriptionText logging", defaultValue: true)
    }
 }
 
@@ -46,7 +50,7 @@ void updated() {
 
 void initialize() {
    if (enableDebug) log.debug "Initializing"
-   Integer disableMinutes = 30
+   int disableMinutes = 30
    if (enableDebug) {
       log.debug "Debug logging will be automatically disabled in ${disableMinutes} minutes"
       runIn(disableMinutes*60, debugOff)
@@ -55,7 +59,7 @@ void initialize() {
 
 void debugOn(Boolean autoDisable=true) {
    log.warn "Enabling debug logging..."
-   Integer disableMinutes = 30
+   int disableMinutes = 30
    if (autoDisable) {
       log.debug "Debug logging will be automatically disabled in ${disableMinutes} minutes"
       runIn(disableMinutes*60, debugOff)
@@ -93,20 +97,7 @@ void syncAttributes() {
 
 /* ======== Device capability methods ======== */
 
-void deviceNotification(text) {
-   if (enableDebug) log.debug "deviceNotification($text)"
-   parent.sendCommandFromChildDevice(device.deviceNetworkId, "deviceNotification", [text])
+void refresh() {
+   if (enableDebug) log.debug "refresh()"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "refresh")
 }
-
-// Can uncomment if need for custom driver with these commands (also add as commands above):
-/*
-void arrived() {
-   if (enableDebug) log.debug "arrived()"
-   parent.sendCommandFromChildDevice(device.deviceNetworkId, "arrived")
-}
-
-void departed() {
-   if (enableDebug) log.debug "departed()"
-   parent.sendCommandFromChildDevice(device.deviceNetworkId, "departed")
-}
-*/

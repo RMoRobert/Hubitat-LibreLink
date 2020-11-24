@@ -13,7 +13,7 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-10-10
+ *  Last modified: 2020-11-23
  *
  */ 
  
@@ -43,17 +43,17 @@ preferences {
 
 /* ======== General device and convenience methods ======== */
 
-def installed(){
+void installed(){
    log.debug "Installed..."
    initialize()
 }
 
-def updated() {
+void updated() {
    if (enableDebug) log.debug "Updated..."
    initialize()
 }
 
-def initialize() {
+void initialize() {
    if (enableDebug) log.debug "Initializing"
    int disableMinutes = 30
    if (enableDebug) {
@@ -79,7 +79,7 @@ void debugOff() {
 
 void doSendEvent(Map eventData, Boolean forceStateChange=false) {
    if (enableDebug) log.debug("doSendEvent(${eventData}...")
-   def descriptionText = "${device.displayName} ${eventData.name} is ${eventData.value}${eventData.unit ?: ''}"
+   String descriptionText = "${device.displayName} ${eventData.name} is ${eventData.value}${eventData.unit ?: ''}"
    if (enableDesc && (device.currentValue(eventData.name) != eventData.value || eventData.isStateChange)) log.info(descriptionText)
    Map eventProperties = [name: eventData.name, value: eventData.value, descriptionText: descriptionText,
       unit: eventData.unit, phyiscal: eventData.physical, digital: eventData.digital,
@@ -89,7 +89,7 @@ void doSendEvent(Map eventData, Boolean forceStateChange=false) {
 }
 
 // Probably won't happen but...
-def parse(String description) {
+void parse(String description) {
    log.warn "parse() not implemented: '${description}'"
 }
 
@@ -102,68 +102,68 @@ void syncAttributes() {
 
 /* ======== Device capability methods ======== */
 
-def refresh() {
+void refresh() {
    if (enableDebug) log.debug "refresh()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "refresh")
 }
 
-def on() {
+void on() {
    if (enableDebug) log.debug "on()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "on")
 }
 
-def off() {
+void off() {
    if (enableDebug) log.debug "off()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "off")
 }
 
-def setLevel(level, duration=null) {
+void setLevel(level, duration=null) {
    if (enableDebug) log.debug "setLevel($level, $transitionTime)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId,
       "setLevel", [level, (duration != null ? duration.toBigDecimal() : 1)])
 }
 
-def setColor(color) {
+void setColor(color) {
    if (enableDebug) log.debug "setColor($color)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setColor", [color])
 }
 
-def setHue(hue) {
+void setHue(hue) {
    if (enableDebug) log.debug "setHue($hue)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setHue", [hue])
 }
 
-def setSaturation(sat) {
+void setSaturation(sat) {
    if (enableDebug) log.debug "setSaturation($sat)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setSaturation", [sat])
 }
 
-def setColorTemperature(ct) {
+void setColorTemperature(ct) {
    if (enableDebug) log.debug "setColorTemperature($ct)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setColorTemperature", [ct])
 }
 
-def startLevelChange(direction) {
+void startLevelChange(direction) {
    if (enableDebug) log.debug "startLevelChange($direction)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "startLevelChange", [direction])
 }
 
-def stopLevelChange() {
+void stopLevelChange() {
    if (enableDebug) log.debug "stopLevelChange()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "stopLevelChange")
 }
 
-def setEffect(effectNum) {
+void setEffect(effectNum) {
    if (enableDebug) log.debug "setEffect($effectNum)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setEffect", [effectNum])
 }
 
-def setNextEffect() {
+void setNextEffect() {
    if (enableDebug) log.debug "setNextEffect()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setNextEffect")
 }
 
-def setPreviousEffect() {
+void setPreviousEffect() {
    if (enableDebug) log.debug "setPreviousEffect()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setPreviousEffect")
 }

@@ -13,7 +13,7 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-10-10
+ *  Last modified: 2020-11-23
  *
  */ 
  
@@ -45,17 +45,17 @@ preferences {
 
 /* ======== General device and convenience methods ======== */
 
-def installed(){
+void installed(){
    log.debug "Installed..."
    initialize()
 }
 
-def updated() {
+void updated() {
    if (enableDebug) log.debug "Updated..."
    initialize()
 }
 
-def initialize() {
+void initialize() {
    if (enableDebug) log.debug "Initializing"
    int disableMinutes = 30
    if (enableDebug) {
@@ -81,7 +81,7 @@ void debugOff() {
 
 void doSendEvent(Map eventData, Boolean forceStateChange=false) {
    if (enableDebug) log.debug("doSendEvent(${eventData}...")
-   def descriptionText = "${device.displayName} ${eventData.name} is ${eventData.value}${eventData.unit ?: ''}"
+   String descriptionText = "${device.displayName} ${eventData.name} is ${eventData.value}${eventData.unit ?: ''}"
    if (enableDesc && (device.currentValue(eventData.name) != eventData.value || eventData.isStateChange)) log.info(descriptionText)
    Map eventProperties = [name: eventData.name, value: eventData.value, descriptionText: descriptionText,
       unit: eventData.unit, phyiscal: eventData.physical, digital: eventData.digital,
@@ -91,7 +91,7 @@ void doSendEvent(Map eventData, Boolean forceStateChange=false) {
 }
 
 // Probably won't happen but...
-def parse(String description) {
+void parse(String description) {
    log.warn "parse() not implemented: '${description}'"
 }
 
@@ -104,73 +104,73 @@ void syncAttributes() {
 
 /* ======== Device capability methods ======== */
 
-def refresh() {
+void refresh() {
    if (enableDebug) log.debug "refresh()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "refresh")
 }
 
-def auto() {
+void auto() {
    if (enableDebug) log.debug "auto()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "auto")
 }
 
-def cool() {
+void cool() {
    if (enableDebug) log.debug "cool()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "cool")
 }
 
-def emergencyHeat() {
+void emergencyHeat() {
    if (enableDebug) log.debug "emergencyHeat()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "emergencyHeat")
 }
 
-def fanAuto() {
+void fanAuto() {
    if (enableDebug) log.debug "fanAuto()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "fanAuto")
 }
 
-def fanCirculate() {
+void fanCirculate() {
    if (enableDebug) log.debug "fanCirculate()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "fanCirculate")
 }
 
-def fanOn() {
+void fanOn() {
    if (enableDebug) log.debug "fanOn()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "fanOn")
 }
 
-def heat() {
+void heat() {
    if (enableDebug) log.debug "heat()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "heat")
 }
 
-def off() {
+void off() {
    if (enableDebug) log.debug "off()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "off")
 }
 
-def setCoolingSetpoint(temperature) {
+void setCoolingSetpoint(temperature) {
    if (enableDebug) log.debug "setCoolingSetpoint($temperature)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setCoolingSetpoint", [temperature])
 }
 
-def setHeatingSetpoint(temperature) {
+void setHeatingSetpoint(temperature) {
    if (enableDebug) log.debug "setHeatingSetpoint($temperature)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setHeatingSetpoint", [temperature])
 }
 
-def setSchedule(scheduleJson) {
+void setSchedule(scheduleJson) {
    if (enableDebug) log.debug "setSchedule($scheduleJson)"
    // TODO: Test if schedule needs to be converted to String or re-converted to JSON/map on receiving hub?
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setSchedule", [scheduleJson])
 }
 
-def setThermostatFanMode(fanMode) {
+void setThermostatFanMode(fanMode) {
    if (enableDebug) log.debug "setThermostatFanMode($fanMode)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setThermostatFanMode", [fanMode])
 }
 
-def setThermostatMode(thermostatMode) {
+void setThermostatMode(thermostatMode) {
    if (enableDebug) log.debug "setThermostatMode($thermostatMode)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setThermostatMode", [thermostatMode])
 }
