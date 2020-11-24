@@ -73,7 +73,8 @@ String getVersion() {
       "llLZW36": [capability: "capability.switchLevel", displayName: "Inovelli LZW36 Fan/Lights (with Advanced driver)", driver: "LibreLink Inovelli LZW36 Advanced (Fan/Light)"],
       "llShades": [capability: "capability.windowShade", displayName: "Window shades", driver: "LibreLink Window Shade"],
       "llShadesWithLevel": [capability: "capability.windowShade", displayName: "Window shades (with Level)", driver: "LibreLink Window Shade (with Level)"],
-      "llFans": [capability: "capability.fanControl", displayName: "Fans", driver: "LibreLink Fan"],
+      "llFans": [capability: "capability.fanControl", displayName: "Fans (speed only)", driver: "LibreLink Fan"],
+      "llFanLevels": [capability: "capability.fanControl", displayName: "Fans (with level)", driver: "LibreLink Fan (with Level)"],
       "llRGBWBulbs": [capability: "capability.colorControl", displayName: "RGBW Bulbs", driver: "LibreLink RGBW Bulb"]
    ],
    "Sensors": [

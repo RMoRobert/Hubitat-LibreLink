@@ -18,7 +18,7 @@
  */ 
  
 metadata {
-   definition (name: "LibreLink Fan", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-fan-with-level.groovy") {
+   definition (name: "LibreLink Fan (with Level)", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-fan-with-level.groovy") {
       capability "Actuator"
       capability "Refresh"
       capability "Switch"
