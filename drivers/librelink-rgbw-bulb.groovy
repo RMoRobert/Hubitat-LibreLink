@@ -13,7 +13,7 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-11-23
+ *  Last modified: 2021-03-27
  *
  */ 
  
@@ -138,9 +138,10 @@ void setSaturation(sat) {
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setSaturation", [sat])
 }
 
-void setColorTemperature(ct) {
-   if (enableDebug) log.debug "setColorTemperature($ct)"
-   parent.sendCommandFromChildDevice(device.deviceNetworkId, "setColorTemperature", [ct])
+void setColorTemperature(ct, level=null, duration=null) {
+   if (enableDebug) log.debug "setColorTemperature($ct, $level, $duration)"
+   if (level != null || duration != null) parent.sendCommandFromChildDevice(device.deviceNetworkId, "setColorTemperature", [ct, level, duration])
+   else parent.sendCommandFromChildDevice(device.deviceNetworkId, "setColorTemperature", [ct]) // compatibility with pre-2.2.6 capability specs
 }
 
 void startLevelChange(direction) {

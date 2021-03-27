@@ -2,10 +2,10 @@
 	"packageName": "LibreLink",
 	"minimumHEVersion": "2.1.2",
 	"author": "Robert Morris",
-	"dateReleased": "2020-11-23",
+	"dateReleased": "2021-03-27",
 	"communityLink": "",
 	"licenseFile": "https://www.apache.org/licenses/LICENSE-2.0.txt",
-	"releaseNotes": "Version 1.1: All drivers updated and some new drivers added (shade with level, fan with level, push/held/released button, more dedicated motion sensor drivers; possible performance enhancements/refactoring)\n\n\n\n1.0.6 - Added Dome Siren driver\n1.0.5 - Fixed typo in motion-only and presence driver in HPM manifest\nAdded Inovelli LZW36 (fan/light) driver, same note as below\n1.0.4 - Added Inovelli LZW30/31-SN-specific drivers\n1.0.3 - Added motion-only (no temperature) driver\n1.0.2 - Improved logging of HTTP errors\n1.0.1 - Fix to unsubscribe from unselected device events when needed",
+	"releaseNotes": "Version 1.1.1: Updates for some drivers to match new Hubitat 2.2.6 commands.\nVersion 1.1: All drivers updated and some new drivers added (shade with level, fan with level, push/held/released button, more dedicated motion sensor drivers; possible performance enhancements/refactoring)\n\n\n\n1.0.6 - Added Dome Siren driver\n1.0.5 - Fixed typo in motion-only and presence driver in HPM manifest\nAdded Inovelli LZW36 (fan/light) driver, same note as below\n1.0.4 - Added Inovelli LZW30/31-SN-specific drivers\n1.0.3 - Added motion-only (no temperature) driver\n1.0.2 - Improved logging of HTTP errors\n1.0.1 - Fix to unsubscribe from unselected device events when needed",
 	"apps" : [
 		{
 			"id": "a0be9220-3af3-429a-9b2b-e9b42d4d46f6",
@@ -34,7 +34,7 @@
          "name": "LibreLink Button (Push/Hold/Release/Double-Tap)",
          "namespace": "RMoRobert",
          "location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-button-push-hold-rel-dbl-temp.groovy",
-         "version": "1.1.0",
+         "version": "1.1.1",
          "required": true
       },
       {
@@ -42,7 +42,7 @@
          "name": "LibreLink Button (Push/Hold/Release)",
          "namespace": "RMoRobert",
          "location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-button-push-hold-rel.groovy",
-         "version": "1.1.0",
+         "version": "1.1.1",
          "required": true
       },
 		{
@@ -98,7 +98,7 @@
          "name": "LibreLink Inovelli LZW30-SN Advanced (Switch)",
          "namespace": "RMoRobert",
          "location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-inovelli-lzw30-sn-adv.groovy",
-         "version": "1.1.0",
+         "version": "1.1.1",
          "required": true
       },
       {
@@ -106,7 +106,7 @@
          "name": "LibreLink Inovelli LZW31-SN Advanced (Dimmer)",
          "namespace": "RMoRobert",
          "location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-inovelli-lzw31-sn-adv.groovy",
-         "version": "1.1.0",
+         "version": "1.1.1",
          "required": true
       },
       {
@@ -114,7 +114,7 @@
          "name": "LibreLink Inovelli LZW36 Advanced (Fan/Light)",
          "namespace": "RMoRobert",
          "location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-inovelli-lzw36-adv.groovy",
-         "version": "1.1.0",
+         "version": "1.1.1",
          "required": true
       },
 		{
@@ -194,7 +194,7 @@
 			"name": "LibreLink RGBW Bulb",
 			"namespace": "RMoRobert",
 			"location": "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-rgbw-bulb.groovy",
-			"version": "1.1.0",
+			"version": "1.1.1",
 			"required": true
 		},
 		{

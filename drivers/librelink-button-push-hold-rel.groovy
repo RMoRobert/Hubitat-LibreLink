@@ -13,7 +13,7 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-11-23
+ *  Last modified: 2021-03-21
  *
  */ 
  
@@ -22,7 +22,6 @@ metadata {
       capability "Sensor"
       capability "PushableButton"
       capability "HoldableButton"
-      capability "DoubleTapableButton"
       capability "ReleasableButton"
       capability "Battery"
       capability "Refresh"

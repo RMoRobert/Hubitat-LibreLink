@@ -313,6 +313,7 @@ def pageLinkDevices() {
    }
 }
 
+// Probably won't need anymore since are doing the above instead...
 def pageChooseDevices() {
    dynamicPage(name: "pageChooseDevices", uninstall: false, install: false, nextPage: "pageLinkDevices") {
       section(styleSection("Choose devices of certain capabilities")) {
@@ -347,7 +348,7 @@ private void initializeAppEndpoint(Boolean forceNewAccessToken=false) {
    if (enableDebug) log.debug "initializeAppEndpoint()"
    if (!state.accessToken || forceNewAccessToken) {
       try {
-         log.warn "Creating access token..."
+         log.debug "Creating access token..."
          createAccessToken()
       } 
       catch(Exception ex) {
@@ -448,15 +449,15 @@ void updateModeSubscriptions(String modeSyncMethod = settings["modeSyncMethod"])
    // Update subscriptions, etc. now so user doesn't have to click "Done":
    switch (modeSyncMethod) {
       case "this":
-         if (enableDebug) log.warn "modeSyncMethod = this; subscribing to mode changes on this hub"
+         if (enableDebug) log.debug "modeSyncMethod = this; subscribing to mode changes on this hub"
          subscribe(location, "mode", handleModeChange)
          break
       case "other":
-         if (enableDebug) log.warn "modeSyncMethod = other; unsubscribing from mode changes on this hub"
+         if (enableDebug) log.debug "modeSyncMethod = other; unsubscribing from mode changes on this hub"
          unsubscribe(location, "mode")
          break
       default:
-         if (enableDebug) log.warn "modeSyncMethod = no; unsubscribing from mode changes on this hub"
+         if (enableDebug) log.debug "modeSyncMethod = no; unsubscribing from mode changes on this hub"
          unsubscribe(location, "mode")
          break
    }
@@ -499,7 +500,7 @@ void sendCommandFromChildDevice(String childDNI, String commandName, List parame
 void pingOtherHub() {
    if (enableDebug) log.debug "Sending ping to other hub..."
    Map params = [uri: getRemoteUri("/libreLinkHubPing"), contentType: "application/json", timeout: 10]
-   log.warn params
+   if (enableDebug) log.debug "Sent ping to other hub with parameters: $params"
    asynchttpGet(handlePingOtherHubResponse, params)
 }
 
@@ -598,7 +599,6 @@ Boolean testOtherHubConnection(Integer timeoutInSeconds=10) {
    if (enableDebug) log.debug "Sending test ping to other hub..."
    Boolean successful = false
    Map params = [uri: getRemoteUri("/libreLinkHubPing"), contentType: "application/json", timeout: timeoutInSeconds]
-   //log.warn params
    try {
       httpGet(params) { response ->
          successful = (response?.data ? response.data.pingTime : false)
