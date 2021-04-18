@@ -1,6 +1,6 @@
 /**
  * =======================================================================================
- *  Copyright 2020 Robert Morris
+ *  Copyright 2021 Robert Morris
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  *  in compliance with the License. You may obtain a copy of the License at:
@@ -13,7 +13,7 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2021-03-27
+ *  Last modified: 2021-04-17
  *
  */ 
  
@@ -25,12 +25,12 @@ metadata {
       capability "SwitchLevel"
       capability "ChangeLevel" // can comment out if don't want or devices don't support
       capability "Light"
+      capability "Flash"
       capability "PushableButton"
       capability "HoldableButton"
       capability "DoubleTapableButton"
       capability "ReleasableButton"
 
-      command "flash"
       command "setConfigParameter", [[name:"Parameter Number*", type: "NUMBER"], [name:"Value*", type: "NUMBER"], [name:"Size*", type: "NUMBER"]]
       command "setFanIndicator", [[name: "Notification Value*", type: "NUMBER", description: "See https://nathanfiscus.github.io/inovelli-notification-calc to calculate"]]
       command "setFanIndicator", [[name:"Color", type: "ENUM", constraints: ["red", "red-orange", "orange", "yellow", "green", "spring", "cyan", "azure", "blue", "violet", "magenta", "rose", "white"]],

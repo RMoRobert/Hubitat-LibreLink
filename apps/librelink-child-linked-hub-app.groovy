@@ -12,7 +12,7 @@
  * TO INSTALL:
  * Documentation coming soon.
  *
- * Copyright 2020 Robert Morris
+ * Copyright 2021 Robert Morris
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at:
  *
@@ -24,8 +24,8 @@
  *
  * =======================================================================================
  *
- * Last modified: 2020-11-23
- *        
+ * Last modified: 2021-04-17
+ * 
  * 1.0    - First public release
  * 1.0.1  - Fix to unsubscribe from device events if device un-selected
  * 1.0.2  - Added more information (status) to HTTP errors; tweaked version reporting for apps (may be used in future)
@@ -34,12 +34,13 @@
  * 1.0.5  - Added Inovelli LZW36 drivers (same note as LZW30/31-SN)
  * 1.0.6  - Added Dome Siren driver
  * 1.1    - New drivers (pushed/held/released buttion, motion/4-in-1, fan and shade with "level"), performance improvements
+ * 2.0.0  - Added cloud connection option; new drivers (speech, music player)
  *
  */
 
 import groovy.transform.Field
 
-@Field static final String version = "1.1.0"
+@Field static final String version = "2.0.0"
 
 definition(
    name: "LibreLink (Linked Hub Child App)",
@@ -70,12 +71,15 @@ String getVersion() {
       "llSceneDimmer": [capability: "capability.switch", displayName: "Scene Dimmers (Switch/Level and Buttons)", driver: "LibreLink Scene Dimmer"],
       "llLZW30SN": [capability: "capability.switch", displayName: "Inovelli LZW30-SN Switches (with Advanced driver)", driver: "LibreLink Inovelli LZW30-SN Advanced (Switch)"],
       "llLZW31SN": [capability: "capability.switchLevel", displayName: "Inovelli LZW31-SN Dimmers (with Advanced driver)", driver: "LibreLink Inovelli LZW31-SN Advanced (Dimmer)"],
+      "llRGBWBulbs": [capability: "capability.colorControl", displayName: "RGBW Bulbs", driver: "LibreLink RGBW Bulb"]
+   ],
+   "Fans, Shades, Blinds": [
       "llLZW36": [capability: "capability.switchLevel", displayName: "Inovelli LZW36 Fan/Lights (with Advanced driver)", driver: "LibreLink Inovelli LZW36 Advanced (Fan/Light)"],
       "llShades": [capability: "capability.windowShade", displayName: "Window shades", driver: "LibreLink Window Shade"],
       "llShadesWithLevel": [capability: "capability.windowShade", displayName: "Window shades (with Level)", driver: "LibreLink Window Shade (with Level)"],
+      "llShadesWithLevel": [capability: "capability.windowBlind", displayName: "Window blinds (with Level)", driver: "LibreLink Window Blind (with Level)"],
       "llFans": [capability: "capability.fanControl", displayName: "Fans (speed only)", driver: "LibreLink Fan"],
       "llFanLevels": [capability: "capability.fanControl", displayName: "Fans (with level)", driver: "LibreLink Fan (with Level)"],
-      "llRGBWBulbs": [capability: "capability.colorControl", displayName: "RGBW Bulbs", driver: "LibreLink RGBW Bulb"]
    ],
    "Sensors": [
       "llContacts": [capability: "capability.contactSensor", displayName: "Contact sensors", driver: "LibreLink Contact Sensor"],
@@ -88,9 +92,11 @@ String getVersion() {
       "llTempHums": [capability: "capability.temperatureMeasurement", displayName: "Temperature/Humidity sensors", driver: "LibreLink Temperature/Humidity Sensor"],
       "llWaters": [capability: "capability.waterSensor", displayName: "Water sensors", driver: "LibreLink Water Sensor"]
    ],
-   "Buttons and Mobile App Devices": [
+   "Buttons, Mobile App, and Music/Speech Devices": [
       "llButtonsPHRDT": [capability: "capability.doubleTapableButton", displayName: "Buttons (push/hold/release/double-tap, temperature)", driver: "LibreLink Button (Push/Hold/Release/Double-Tap)"],
       "llButtonsPHR": [capability: "capability.pushableButton", displayName: "Buttons (push/hold/release)", driver: "LibreLink Button (Push/Hold/Release)"],
+      "llMusicPlayer": [capability: "capability.musicPlayer", displayName: "Music Players (with speech)", driver: "LibreLink Music Player"],
+      "llSpeechSynth": [capability: "capability.speechSynthesis", displayName: "Speech synthesis devices", driver: "LibreLink Speech Synthesizer"],
       "llPresences": [capability: "capability.presenceSensor", displayName: "Presence sensors", driver: "LibreLink Presence Sensor"],
       "llMobileAppDevs": [capability: "capability.notification", displayName: "Mobile app devices", driver: "LibreLink Mobile App Device"]
    ],
@@ -177,21 +183,32 @@ def pageFirstPage() {
 def pageAddHub() {
    dynamicPage(name: "pageAddHub", uninstall: true, install: false, nextPage: pageManageHub) {
       section(styleSection("Link with other hub")) {
-         input name: "otherHubIP", type: "text", title: "Other hub IP address:", required: true, submitOnChange: true
-         input name: "otherHubNickname", type: "text", title: "\"Nickname\" for other hub (optional; will be used as part of app and linked hub device names):"
+         input name: "hubType", type: "enum", title: "Other hub connection type:", required: true, submitOnChange: true,
+            options: [["hubitat-local": "Hubitat (LAN/local)"], ["hubitat-cloud": "Hubitat (cloud)"]], defaultValue: "hubitat-local"
+         input name: "otherHubIP", type: "text", title: "Other hub IP address:", required: (hubType != "hubitat-cloud"), submitOnChange: true
+         if (settings["hubType"] == "hubitat-cloud") {
+            paragraph: "NOTE: IP address is optional for Hubitat cloud connection. (You may provide local/LAN IP address of remote hub if you wish. It is not currently used at all.)"
+         }
+         input name: "otherHubNickname", type: "text", title: "\"Nickname\" for other hub (optional; will be used as part of child app name):"
          input name: "enumRole", type: "enum", title: "LibreLink hub key exchange role:", required: true, submitOnChange: true,
             options: [["keyAuthority": "Linking key authority"], ["keyRecipient": "Linking key recipient"]]
          if (enumRole == "keyAuthority") {
-            if (settings["otherHubIP"]) {
+            if (settings["otherHubIP"] || settings["hubType"] == "hubitat-cloud") {
                // Generate map of settings to be "received" by other hub. "hubType" is reserved for future expansion possibilities.
-               Map keyMap = [token: state.accessToken, uri: getFullLocalApiServerUrl(), hubType: "hubitat-local"]
+               Map keyMap = [:]
+               if (settings["hubType"] == "hubitat-cloud") {
+                  keyMap = [token: state.accessToken, uri: getFullApiServerUrl(), hubType: "hubitat-cloud"]
+               }
+               else {
+                  keyMap = [token: state.accessToken, uri: getFullLocalApiServerUrl(), hubType: "hubitat-local"]
+               }
                String encodedParams = URLEncoder.encode((new groovy.json.JsonBuilder(keyMap)).toString().bytes.encodeBase64().toString(), "utf-8")
                paragraph '<b>Copy/paste the key below to the other hub.</b> Choose the "Linking key recipient" role for the other hub.'
                paragraph "<textarea id=\"linkKeyForOtherHub\" rows=\"5\" cols=\"50\" onclick=\"this.select()\">$encodedParams</textarea>"
             }
             href name: "hrefTestConnection", title: "Test connection",
                description: "Test communication between hubs after you have configured both hubs (recommendation: test both hubs)", page: "pageTestConnection"
-            if (settings["otherHubIP"] && state.otherHubAccessToken && state.otherHubUri) {
+            if ((settings["otherHubIP"] || settings["hubType"] == "hubitat-cloud") && state.otherHubAccessToken && state.otherHubUri) {
                paragraph "Connection information from other hub received."
             }
             else {
@@ -201,21 +218,23 @@ def pageAddHub() {
          else if (enumRole == "keyRecipient") {
             input name: "linkingKey", type: "string", title: "Linking key from key authority hub:",
                description: "Copy/paste linking key from other hub here", required: true, submitOnChange: true
-            if (settings["otherHubIP"] && settings["linkingKey"]) {
+            if ((settings["otherHubIP"] || settings["hubType"] == "hubitat-cloud") && settings["linkingKey"]) {
                Map linkingMap = [:]
                try {
                   linkingMap = parseJson(new String(URLDecoder.decode(linkingKey, "utf-8").decodeBase64()))
+                  log.trace "linkingMap = $linkingMap"
                   state.otherHubAccessToken = linkingMap.token
                   state.otherHubUri = linkingMap.uri
                   // May use this key in the future, but for now just check and continue anyway:
                   if (enableDebug) log.debug "Linking map = $linkingMap"
-                  if (!(linkingMap.hubType == "hubitat-local")) log.warn "Hub connection type not specified as local Hubitat. Ensure settings on other hub are correct."
-                  if (state.otherHubAccessToken && state.otherHubUri) {
+                  if (!(linkingMap.hubType == "hubitat-local" || linkingMap.hubType == "hubitat-cloud")) log.warn "Hub connection type not specified as local or cloud Hubitat. Ensure settings on other hub are correct."
+                  if (state.otherHubAccessToken && (state.otherHubUri || linkingMap.hubType == "hubitat-cloud")) {
                      paragraph "<b>Press the button below</b> to establish a link between the two hubs, then use \"Test Connection\" on both hubs to ensure it is working:"
-                     if (!(state.otherHubUri.contains(otherHubIP)) && linkingMap.hubType == "hubitat-local") {
-                        // Not the most foolproof way to test, but should catch most cases^
+                     if (linkingMap.hubType == "hubitat-local" && !(state.otherHubUri?.contains(otherHubIP))) {
+                        // Not the most foolproof way to test, but should catch most cases:
                         paragraph "Warning: the linking key IP address does not match the address entered for the other hub. Please verify both are correct and continue only if certain."
                      }
+                     // else: no check currently if remote hub IP matches for cloud connections, but shouldn't matter if all is correct
                      input name: "btnLink", type: "button", title: "Link!"
                   }
                   else {
@@ -263,7 +282,7 @@ def pageManageHub() {
    }
    // Page:
    dynamicPage(name: "pageManageHub", uninstall: true, install: true) {
-      if (!(settings["otherHubIP"] && state.otherHubAccessToken && state.otherHubUri)) {
+      if (!((settings["otherHubIP"] || settings["hubType"] == "hubitat-cloud") && state.otherHubAccessToken && state.otherHubUri)) {
          section(styleSection("Oops!")) {
             paragraph "It seems your hubs are not yet linked. Please re-open the app to re-attempt setup."
          }
@@ -510,7 +529,13 @@ void pingOtherHub() {
  */
 void attemptConnection() {
    String uri = getRemoteUri("/otherHubKey")
-   Map bodyMap = [token: "${state.accessToken}", uri: getFullLocalApiServerUrl()]
+   Map bodyMap = [:]
+   if (settings["hubType"] == "hubitat-cloud") {
+      bodyMap = [token: state.accessToken, uri: getFullApiServerUrl()]
+   }
+   else {
+      bodyMap = [token: state.accessToken, uri: getFullLocalApiServerUrl()]
+   }
    log.debug "Attempting connection to other hub..."
    httpPutJson([uri: uri, timeout: 10, body: bodyMap]) { resp ->
       if (enableDebug) { log.debug "Connection attempt response:"; resp.properties.each { log.trace it } }

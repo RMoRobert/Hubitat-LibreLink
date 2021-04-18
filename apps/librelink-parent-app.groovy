@@ -11,7 +11,7 @@
  *  TO INSTALL:
  *  Documentation coming soon.
  *
- *  Copyright 2020 Robert Morris
+ *  Copyright 2021 Robert Morris
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  *  in compliance with the License. You may obtain a copy of the License at:
  *
@@ -23,13 +23,13 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-10-29
+ *  Last modified: 2021-04-17
  *
  */ 
 
 import groovy.transform.Field
 
-@Field static final String version = "1.0.2"
+@Field static final String version = "2.0.0"
 
 definition(
    name: "LibreLink",
@@ -51,7 +51,7 @@ String getVersion() {
 
 preferences {
    page(name: "mainPage", title: "LibreLink", install: true, uninstall: true) {
-      section {      
+      section {
          if (app.getInstallationState() == "INCOMPLETE") {
             paragraph("<b>Please press \"Done\" to finish installing this app, then re-open it to begin linking hubs.</b>")
          }
@@ -63,19 +63,19 @@ preferences {
 }
 
 def installed() {
-    log.debug "Installed with settings: ${settings}"
-    initialize()
+   log.debug "installed()"
+   initialize()
 }
 
 def updated() {
-    log.debug "Updated with settings: ${settings}"
-    //unsubscribe()
-    initialize()
+   log.debug "Updated with settings: ${settings}"
+   //unsubscribe()
+   initialize()
 }
 
 def initialize() {
-    log.debug "Initializing; there are ${childApps.size()} child apps installed:"
-    childApps.each {child ->
-        log.debug "  child app: ${child.label}"
-    }
+   log.debug "Initializing; there are ${childApps.size()} child apps installed:"
+   childApps.each {child ->
+      log.debug "  child app: ${child.label}"
+   }
 }

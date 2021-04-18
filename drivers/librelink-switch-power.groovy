@@ -1,6 +1,6 @@
 /**
  * =======================================================================================
- *  Copyright 2020 Robert Morris
+ *  Copyright 2021 Robert Morris
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  *  in compliance with the License. You may obtain a copy of the License at:
@@ -13,7 +13,7 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-11-23
+ *  Last modified: 2021-04-17
  *
  */ 
  
@@ -21,6 +21,7 @@ metadata {
    definition (name: "LibreLink Switch with Power", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-switch-power.groovy") {
       capability "Actuator"
       capability "Switch"
+      //capability "Flash"  // required command is implemented; can uncomment if needed for any device(s)
       capability "Refresh"
       capability "PowerMeter"
       capability "EnergyMeter" // can comment out if don't need energy attribute
@@ -109,4 +110,9 @@ void on() {
 void off() {
    if (enableDebug) log.debug "off()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "off")
+}
+
+void flash() {
+   if (enableDebug) log.debug "flash()"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "flash")
 }

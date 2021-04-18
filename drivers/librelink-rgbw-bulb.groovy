@@ -1,6 +1,6 @@
 /**
  * =======================================================================================
- *  Copyright 2020 Robert Morris
+ *  Copyright 2021 Robert Morris
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  *  in compliance with the License. You may obtain a copy of the License at:
@@ -13,7 +13,7 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2021-03-27
+ *  Last modified: 2021-04-17
  *
  */ 
  
@@ -23,7 +23,9 @@ metadata {
       capability "Refresh"
       capability "Switch"
       capability "SwitchLevel"
+      capability "LevelPreset" // can comment out if devices don't really support
       capability "Light"
+      //capability "Flash"  // required command is implemented; can uncomment if needed for any device(s)
       capability "ColorControl"
       capability "ColorTemperature"
       capability "ChangeLevel"
@@ -117,10 +119,27 @@ void off() {
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "off")
 }
 
-void setLevel(level, duration=null) {
+void flash() {
+   if (enableDebug) log.debug "flash()"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "flash")
+}
+
+void setLevel(level) {
+   if (enableDebug) log.debug "setLevel($level, $transitionTime)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId,
+      "setLevel", [level])
+}
+
+void setLevel(level, duration) {
    if (enableDebug) log.debug "setLevel($level, $transitionTime)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId,
       "setLevel", [level, (duration != null ? duration.toBigDecimal() : 1)])
+}
+
+void presetLevel(level) {
+   if (enableDebug) log.debug "presetLevel($level, $transitionTime)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId,
+      "presetLevel", [level])
 }
 
 void setColor(color) {

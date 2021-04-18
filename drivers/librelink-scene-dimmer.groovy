@@ -1,6 +1,6 @@
 /**
  * =======================================================================================
- *  Copyright 2020 Robert Morris
+ *  Copyright 2021 Robert Morris
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  *  in compliance with the License. You may obtain a copy of the License at:
@@ -13,7 +13,7 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-11-23
+ *  Last modified: 2021-04-17
  *
  */ 
  
@@ -24,6 +24,8 @@ metadata {
       capability "Switch"
       capability "SwitchLevel"
       capability "ChangeLevel" // can comment out if don't want or devices don't support
+      capability "LevelPreset"
+      //capability "Flash" // can uncomment if needed; required command implemented
       capability "Light"
       capability "PushableButton"
       capability "HoldableButton"
@@ -118,6 +120,11 @@ void off() {
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "off")
 }
 
+void flash() {
+   if (enableDebug) log.debug "flash()"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "flash")
+}
+
 void setLevel(level) {
    if (enableDebug) log.debug "setLevel($level)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId,
@@ -128,6 +135,12 @@ void setLevel(level, duration) {
    if (enableDebug) log.debug "setLevel($level, $transitionTime)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId,
       "setLevel", [level, (duration != null ? duration.toBigDecimal() : 1)])
+}
+
+void presetLevel(level) {
+   if (enableDebug) log.debug "presetLevel($level, $transitionTime)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId,
+      "presetLevel", [level])
 }
 
 void startLevelChange(direction) {

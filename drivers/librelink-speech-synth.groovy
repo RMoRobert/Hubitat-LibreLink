@@ -18,13 +18,16 @@
  */ 
  
 metadata {
-   definition (name: "LibreLink Smoke/CO Detector", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-smoke-co.groovy") {
-      capability "Sensor"
-      capability "SmokeDetector"
-      capability "CarbonMonoxideDetector"
-      capability "Battery"
-      capability "Refresh"
-      
+   definition (name: "LibreLink Speech Synthesizer", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-speech-synth.groovy") {
+      capability "Actuator"
+      capability "SpeechSynthesis"
+      capability "Refresh"  // can comment out if don't need
+
+      // Custom Echo Speaks command; uncomment if need to use for that integration (are already implemented below):
+      /*
+      command "playAnnouncement", [[name: "Message to Announce*", type: "STRING", description: "Message to announce"],[name: "Announcement Title", type: "STRING", description: "This displays a title above message on devices with display"], [name: "Set Volume", type: "NUMBER", description: "Sets the volume before playing the message"],[name: "Restore Volume", type: "NUMBER", description: "Restores the volume after playing the message"]]
+      command "playAnnouncementAll", [[name: "Message to Announce*", type: "STRING", description: "Message to announce"],[name: "Announcement Title", type: "STRING", description: "This displays a title above message on devices with display"]]
+      */
       command "syncAttributes"
    }
       
@@ -98,4 +101,19 @@ void syncAttributes() {
 void refresh() {
    if (enableDebug) log.debug "refresh()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "refresh")
+}
+
+void speak(text, volume, voice) {
+   if (enableDebug) log.debug "speak($text, $volume, $voice)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "speak", [text, volume, voice])
+}
+
+void playAnnouncement(message, title=null, volume=null, restoreVolume=null) {
+   if (enableDebug) log.debug "playAnnouncement($message, $title, $volume, $restoreVolume)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "playAnnouncement", [message, title, volume, restoreVolume])
+}
+
+void playAnnouncementAll(message, title=null) {
+   if (enableDebug) log.debug "playAnnouncementAll($message, $title)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "playAnnouncement", [message, title])
 }

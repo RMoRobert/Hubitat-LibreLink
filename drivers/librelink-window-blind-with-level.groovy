@@ -18,19 +18,21 @@
  */ 
  
 metadata {
-   definition (name: "LibreLink Smoke/CO Detector", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-smoke-co.groovy") {
-      capability "Sensor"
-      capability "SmokeDetector"
-      capability "CarbonMonoxideDetector"
-      capability "Battery"
+   definition (name: "LibreLink Window Blind (with Level)", namespace: "RMoRobert", author: "Robert Morris", importUrl: "https://raw.githubusercontent.com/RMoRobert/Hubitat-LibreLink/main/drivers/librelink-window-blind-with-level.groovy") {
+      capability "Actuator"
       capability "Refresh"
+      capability "WindowBlind"
+      capability "Battery"
+      capability "Switch"
+      capability "SwitchLevel"
+      capability "ChangeLevel"
       
       command "syncAttributes"
    }
       
 preferences {
-      input(name: "enableDebug", type: "bool", title: "Enable debug logging", defaultValue: true)
-      input(name: "enableDesc", type: "bool", title: "Enable descriptionText logging", defaultValue: true)
+      input name: "enableDebug", type: "bool", title: "Enable debug logging", defaultValue: true
+      input name: "enableDesc", type: "bool", title: "Enable descriptionText logging", defaultValue: true
    }
 }
 
@@ -99,3 +101,65 @@ void refresh() {
    if (enableDebug) log.debug "refresh()"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "refresh")
 }
+
+void open() {
+   if (enableDebug) log.debug "open()"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "open")
+}
+
+void close() {
+   if (enableDebug) log.debug "close()"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "close")
+}
+
+void setPosition(position) {
+   if (enableDebug) log.debug "setPosition($position)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "setPosition", [position])
+}
+
+void on() {
+   if (enableDebug) log.debug "on()"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "on")
+}
+
+void off() {
+   if (enableDebug) log.debug "off()"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "off")
+}
+
+void setLevel(level, duration=null) {
+   if (enableDebug) log.debug "setLevel($level, $transitionTime)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId,
+      "setLevel", [level, duration])
+}
+
+void setTiltLevel(level, duration=null) {
+   if (enableDebug) log.debug "setTiltLevel($level)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId,
+      "setTiltLevel", [level])
+}
+
+void startPositionChange(direction) {
+   if (enableDebug) log.debug "startPositionChange($direction)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId,
+      "startPositionChange", [direction])
+}
+
+void stopPositionChange() {
+   if (enableDebug) log.debug "stopPositionChange()"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "stopPositionChange")
+}
+
+// Can comment out if don't want to implement "ChangeLevel" capability:
+
+void startLevelChange(direction) {
+   if (enableDebug) log.debug "startLevelChange($direction)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId,
+      "startLevelChange", [direction])
+}
+
+void stopLevelChange() {
+   if (enableDebug) log.debug "stopLevelChange()"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "stopLevelChange")
+}
+

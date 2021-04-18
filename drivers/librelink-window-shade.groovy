@@ -1,6 +1,6 @@
 /**
  * =======================================================================================
- *  Copyright 2020 Robert Morris
+ *  Copyright 2021 Robert Morris
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  *  in compliance with the License. You may obtain a copy of the License at:
@@ -13,7 +13,7 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-11-23
+ *  Last modified: 2021-04-17
  *
  */ 
  
@@ -130,4 +130,21 @@ void setLevel(level, duration=null) {
    if (enableDebug) log.debug "setLevel($level, $transitionTime)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId,
       "setLevel", [level, (duration ?: 1)])
+}
+
+// Not technically part of WindowShade, but part of WindowBlind:
+void setTiltLevel(level, duration=null) {
+   if (enableDebug) log.debug "setTiltLevel($level)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId,
+      "setTiltLevel", [level])
+}
+
+void startPositionChange(direction) {
+   if (enableDebug) log.debug "startPositionChange($direction)"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId,
+      "startPositionChange", [direction])
+}
+
+void stopPositionChange() {
+   if (enableDebug) log.debug "stopPositionChange()"
 }

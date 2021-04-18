@@ -1,6 +1,6 @@
 /**
  * =======================================================================================
- *  Copyright 2020 Robert Morris
+ *  Copyright 2021 Robert Morris
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  *  in compliance with the License. You may obtain a copy of the License at:
@@ -13,7 +13,7 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2020-11-23
+ *  Last modified: 2021-11-23
  *
  */ 
  
@@ -113,6 +113,11 @@ void off() {
 void setSpeed(speed) {
    if (enableDebug) log.debug "setSpeed($speed)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "setSpeed", [speed])
+}
+
+void cycleSpeed() {
+   if (enableDebug) log.debug "cycleSpeed()"
+   parent.sendCommandFromChildDevice(device.deviceNetworkId, "cycleSpeed")
 }
 
 void setLevel(level, duration=null) {
