@@ -183,7 +183,3 @@ void playAnnouncementAll(message, title=null) {
    if (enableDebug) log.debug "playAnnouncementAll($message, $title)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "playAnnouncement", [message, title])
 }
-
-
-    stop()
-    unmute()
