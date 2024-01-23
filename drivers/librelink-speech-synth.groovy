@@ -1,6 +1,6 @@
 /**
  * =======================================================================================
- *  Copyright 2021 Robert Morris
+ *  Copyright 2024 Robert Morris
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  *  in compliance with the License. You may obtain a copy of the License at:
@@ -13,7 +13,7 @@
  *
  * =======================================================================================
  *
- *  Last modified: 2021-04-17
+ *  Last modified: 2024-01-22
  *
  */ 
  
@@ -103,7 +103,7 @@ void refresh() {
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "refresh")
 }
 
-void speak(text, volume, voice) {
+void speak(text, volume=null, voice=null) {
    if (enableDebug) log.debug "speak($text, $volume, $voice)"
    parent.sendCommandFromChildDevice(device.deviceNetworkId, "speak", [text, volume, voice])
 }
